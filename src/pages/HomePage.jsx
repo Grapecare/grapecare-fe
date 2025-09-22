@@ -28,6 +28,9 @@ function HomePage() {
           <Image src={doctors} alt="doctors" width={'100%'}/>
         </div>
       </div>
+      <div className=''>
+        
+      </div>
     </div>
   )
 }
