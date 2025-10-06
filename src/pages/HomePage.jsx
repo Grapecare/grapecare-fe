@@ -2,9 +2,12 @@ import React from 'react'
 import HomeNav from '../components/HomeNav'
 import doctors from '../assets/images/doctors.svg'
 import { Button, Image } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 
 function HomePage() {
+  const navigate = useNavigate()
+  
   return (
     <div>
       <HomeNav/>
