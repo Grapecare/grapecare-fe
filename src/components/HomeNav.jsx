@@ -1,6 +1,6 @@
 import { Button, Image } from '@chakra-ui/react'
 import React from 'react'
-import grapeIcon from '../assets/images/grapeicon.svg'
+import grapeIcon from '../assets/images/grapeIcon.svg'
 import { Link, useNavigate } from 'react-router-dom'
 
 const navMenu = [
