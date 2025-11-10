@@ -21,6 +21,10 @@ const theme = extendTheme({
       900: '#450828',
     },
   },
+  fonts: {
+    heading: `'Jost', sans-serif`,
+    body: `'Jost', sans-serif`,
+  },
 });
 
 export default theme;

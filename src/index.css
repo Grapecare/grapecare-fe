@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Jost", sans-serif;
+  --font-heading: "Jost", sans-serif;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -15,6 +20,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -28,7 +39,9 @@ body {
   margin: 0;
   padding: 0;
   background: #fff;
-  font-family: 'Jost', sans-serif;
+  font-family: 'Jost', sans-serif !important;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 h1 {

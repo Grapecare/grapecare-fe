@@ -41,7 +41,7 @@ function Footer() {
                         borderRadius={'80px'}
                         fontWeight={700}
                         fontSize='18px'
-                        _hover={{ bg: '#EA1D781A' }}
+                        _hover={{ bg: '#ffffff', border: 'none' }}
                         _active={{ bg: '#EA1D7833' }}
                     >
                         Submit

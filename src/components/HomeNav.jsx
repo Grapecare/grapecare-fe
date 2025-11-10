@@ -50,13 +50,19 @@ function HomeNav() {
                 <div className='flex gap-3'>
                     <Button variant='ghost' bg='transparent' color='#333333' fontSize={'16px'}
                         fontWeight={500}
-                        // border={isOpen ? '1px solid #333333' : 'none'}
                         border='1px solid #333333'
+                        _hover={{
+                            border: 'none',
+                            bg: 'transparent',
+                        }}
                         onClick={() => navigate('/login')}
                     >
                         Login
                     </Button>
                     <Button bg='#EA1D78' color='white'
+                        _hover={{
+                            border: 'none',
+                        }}
                         onClick={() => navigate('/signup')}
                     >Sign up</Button>
                 </div>
