@@ -17,7 +17,7 @@ function CareCard({title, subTitle, btnTitle, icon}) {
                 rightIcon={<ArrowForwardIcon />}
                 color="#EA1D78"
                 bg='inherit'
-                _hover={{ bg: '#EA1D781A' }}
+                _hover={{ bg: '#EA1D781A', border: 'none' }}
                 _active={{ bg: '#EA1D7833' }}
             >
                 {btnTitle}
