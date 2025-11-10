@@ -3,6 +3,8 @@ import whiteIcon from '../assets/images/whiteIcon.svg'
 import { Button, Image, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import { EmailIcon } from '@chakra-ui/icons'
 import { FaFacebook, FaInstagram, FaLinkedin, FaX } from 'react-icons/fa6'
+import Twitter from '../assets/images/Twitter.svg'
+import Facebook from '../assets/images/Facebook.svg'
 
 
 function Footer() {
@@ -65,18 +67,40 @@ function Footer() {
                     <div className="">
                         <h2 className="font-bold text-2xl mb-8">Connect with Us</h2>
                         <div className="flex gap-4">
-                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className='p-4 bg-transparent border border-white rounded-full'>
-                                <FaFacebook color="#FFFFFF" size="24" />
-                            </a>
-                            <a href="https://x.com" target="_blank" rel="noopener noreferrer" className='p-4 bg-transparent border border-white rounded-full'>
-                                <FaX color="#FFFFFF" size="24" />
-                            </a>
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className='p-4 bg-transparent border border-white rounded-full'>
-                                <FaInstagram color="#FFFFFF" size="24" />
-                            </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className='p-4 bg-transparent border border-white rounded-full'>
-                                <FaLinkedin color="#FFFFFF" size="24" />
-                            </a>
+                            <div className='border border-[#fff] w-14 h-14 rounded-full flex justify-center items-center'>
+                                <a 
+                                    href="https://x.com" target="_blank" rel="noopener noreferrer" 
+                                    className='bg-white h-6 w-6 flex justify-center items-center rounded-[4px]'>
+                                    <Image
+                                        src={Twitter}
+                                        alt='twitter'
+                                    />
+                                </a>
+                            </div>
+                            <div className='border border-[#fff] w-14 h-14 rounded-full flex justify-center items-center'>
+                                <a 
+                                    href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
+                                    className='bg-white h-6 w-6 p-[2px] flex justify-center items-center rounded-[4px]'
+                                >
+                                    <FaFacebook color="#EA1D78" size="24" />
+                                </a>
+                            </div>
+                            <div className='border border-[#fff] w-14 h-14 rounded-full flex justify-center items-center'>
+                                <a 
+                                    href="https://instagram.com" target="_blank" rel="noopener noreferrer" 
+                                    className='bg-white h-6 w-6 p-[2px] flex justify-center items-center rounded-[4px]'
+                                >
+                                    <FaInstagram color="#EA1D78" size="24" />
+                                </a>
+                            </div>
+                            <div className='border border-[#fff] w-14 h-14 rounded-full flex justify-center items-center'>
+                                <a 
+                                    href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
+                                    className='bg-white h-6 w-6 p-[2px] flex justify-center items-center rounded-[4px]'
+                                >
+                                    <FaLinkedin color="#EA1D78" size="24" />
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

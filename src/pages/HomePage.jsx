@@ -6,27 +6,36 @@ import Mask from '../assets/images/Mask.png'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import CareCard from '../components/CareCard'
 import Footer from '../components/Footer'
+import bloodbank from '../assets/images/BloodBank.svg'
+import savesoul from '../assets/images/savesoul.svg'
+import healthplan from '../assets/images/healthplan.svg'
+import teleconsult from '../assets/images/teleconsult.svg'
+
 
 const cardData = [
   {
     title:'Blood Bank',
     subTitle:'Saving lives faster—instantly link donors to hospitals and patients in need with our real-time blood donation network',
-    btnTitle:'Donate Blood'
+    btnTitle:'Donate Blood',
+    icon:bloodbank
   },
   {
     title:'Save-a-Soul',
     subTitle:'Real stories, real impact. We share urgent medical cases to show how your support transforms lives—bringing hope and life-changing care to those in need',
-    btnTitle:'Donate Now'
+    btnTitle:'Donate Now',
+    icon: savesoul
   },
   {
     title:'Health Plans',
     subTitle:'Health plans designed for your hustle—flexible, affordable coverage for freelancers, entrepreneurs, and those transitioning between jobs.',
-    btnTitle:'Read More'
+    btnTitle:'Read More',
+    icon: healthplan
   },
   {
     title:'TeleConsulting',
     subTitle:'Consult trusted doctors anytime for urgent needs, chronic care, or quick advice. Fast, reliable, and designed for your schedule, because quality care should adapt to your life.',
-    btnTitle:'Book Consultation'
+    btnTitle:'Book Consultation',
+    icon: teleconsult
   },
 ]
 
@@ -59,7 +68,7 @@ function HomePage() {
           </div>
         </div>
         <div className='flex justify-center mb-10'>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 w-full md:w-10/12 border border-[#33333333] rounded-[10px] py-3 md:py-10 px-2 md:px-5 shadow-[0_4px_10px_#0000001A]'>
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 w-full border border-[#33333333] rounded-[10px] py-3 md:py-10 px-2 md:px-5 shadow-[0_4px_10px_#0000001A]'>
             <div className='bg-[#EEF8FF] flex gap-3 md:flex-col items-center justify-start md:justify-center px-1.5 md:px-2.5 py-1.5 md:py-4 border border-[#002D5133] rounded-[5px]'>
               <h3 className='text-[#333333] font-semibold text-base md:text-xl'>10+</h3>
               <p className='text-[#333333] md:text-base text-sm'>Donation Campaigns</p>
@@ -91,6 +100,7 @@ function HomePage() {
                   title={current.title}
                   subTitle={current.subTitle}
                   btnTitle={current.btnTitle}
+                  icon={current.icon}
                 />
               ))
             }
