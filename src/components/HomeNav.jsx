@@ -1,6 +1,6 @@
 import { Button, Image } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import grapeIcon from '../assets/images/grapeicon.svg'
+import grapeIcon from '../assets/images/grapeIcon.svg'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 
