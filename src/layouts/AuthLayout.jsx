@@ -1,5 +1,5 @@
 import React from 'react'
-import grapeIcon from '../assets/images/grapeicon.svg'
+import grapeIcon from '../assets/images/grapeIcon.svg'
 import { Image } from '@chakra-ui/react'
 
 
