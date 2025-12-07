@@ -119,7 +119,7 @@ function Signup() {
                         w='full'
                         mb={4}
                     >
-                        By signing up you confirm that you agree to our <span className='text-[#EA1D78]'>Terms of Use </span>and have read and understood our <span className='text-[#EA1D78]'>Privacy Policy</span>
+                        By signing up you confirm that you agree to our <span className='text-[#EA1D78]'>Terms of Use </span>and have read and understood our <span className='text-[#EA1D78]'>Privacy Policy</span>
                     </Checkbox>
                     <Button
                         // isLoading

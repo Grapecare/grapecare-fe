@@ -1,7 +1,6 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Avatar, Button } from '@chakra-ui/react'
 import React from 'react'
-import bloodbank from '../assets/images/BloodBank.svg'
 
 
 function CareCard({title, subTitle, btnTitle, icon}) {

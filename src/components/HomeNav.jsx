@@ -26,6 +26,14 @@ function HomeNav() {
     const [isOpen, setIsOpen] = useState(false);
 
     const navigate = useNavigate();
+    const isAuthenticated = !!localStorage.getItem('accessToken');
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        navigate('/login');
+    };
     return (
         <nav>
             <div className='flex justify-between items-center md:pr-10 border-b border-[#EEF8FF] py-4 px-3'>
@@ -47,25 +55,39 @@ function HomeNav() {
                         ))
                     }
                 </div>
-                <div className='flex gap-3'>
-                    <Button variant='ghost' bg='transparent' color='#333333' fontSize={'16px'}
-                        fontWeight={500}
-                        border='1px solid #333333'
-                        _hover={{
-                            border: 'none',
-                            bg: 'transparent',
-                        }}
-                        onClick={() => navigate('/login')}
-                    >
-                        Login
-                    </Button>
-                    <Button bg='#EA1D78' color='white'
-                        _hover={{
-                            border: 'none',
-                        }}
-                        onClick={() => navigate('/signup')}
-                    >Sign up</Button>
-                </div>
+                {isAuthenticated ? (
+                    <div className='flex gap-3'>
+                        <Button
+                            variant='solid'
+                            bg='#EA1D78'
+                            color='white'
+                            _hover={{ border: 'none', bg: '#EA1D781A' }}
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </Button>
+                    </div>
+                ) : (
+                    <div className='flex gap-3'>
+                        <Button variant='ghost' bg='transparent' color='#333333' fontSize={'16px'}
+                            fontWeight={500}
+                            border='1px solid #333333'
+                            _hover={{
+                                border: 'none',
+                                bg: 'transparent',
+                            }}
+                            onClick={() => navigate('/login')}
+                        >
+                            Login
+                        </Button>
+                        <Button bg='#EA1D78' color='white'
+                            _hover={{
+                                border: 'none',
+                            }}
+                            onClick={() => navigate('/signup')}
+                        >Sign up</Button>
+                    </div>
+                )}
             </div>
             {/* Mobile Menu */}
             {isOpen && (
@@ -97,14 +119,24 @@ function HomeNav() {
                                 </li>
                             ))
                         }
-                        <li className='text-white text-base py-3.5'
-                            onClick={() => setIsOpen(false)}
-
-                        >
-                            <Link to='/login'>
-                                Portal Login
-                            </Link>
-                        </li>
+                        {isAuthenticated ? (
+                            <li className='text-white text-base py-3.5'
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    handleLogout();
+                                }}
+                            >
+                                Logout
+                            </li>
+                        ) : (
+                            <li className='text-white text-base py-3.5'
+                                onClick={() => setIsOpen(false)}
+                            >
+                                <Link to='/login'>
+                                    Portal Login
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             )}
