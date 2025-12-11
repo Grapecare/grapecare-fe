@@ -1,6 +1,7 @@
 import React from 'react'
+import { Image } from '@chakra-ui/react'
 
-function PsdResetSuccess() {
+function PsdResetSuccess({ grapeIcon, title, subTitle, children }) {
     return (
         <div className="flex w-full md:w-1/2 justify-center overflow-y-auto px-3.5">
             <div className="w-full md:w-4/5 py-10">

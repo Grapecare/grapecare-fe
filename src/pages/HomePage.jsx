@@ -1,9 +1,9 @@
 import React from 'react'
 import HomeNav from '../components/HomeNav'
 import doctors from '../assets/images/doctors.svg'
-import { Avatar, Button, Image } from '@chakra-ui/react'
+import { Button, Image } from '@chakra-ui/react'
 import Mask from '../assets/images/Mask.png'
-import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { useNavigate } from 'react-router-dom'
 import CareCard from '../components/CareCard'
 import Footer from '../components/Footer'
 import bloodbank from '../assets/images/BloodBank.svg'
@@ -40,6 +40,7 @@ const cardData = [
 ]
 
 function HomePage() {
+  const navigate = useNavigate();
 
   return (
     <div className='font-sans'>

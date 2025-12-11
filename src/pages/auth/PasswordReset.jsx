@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AuthLayout from '../../layouts/AuthLayout'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -14,7 +14,6 @@ function PasswordReset() {
             confirmPassword: "",
         },
         validationSchema: Yup.object({
-            email: Yup.string().email('Enter a valid email').required("Email is required"),
             password: Yup.string()
                 .required("Password is required")
                 .min(8, "Password must be at least 8 characters long")

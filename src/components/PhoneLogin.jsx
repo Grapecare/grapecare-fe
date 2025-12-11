@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import InputField from './InputField';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Checkbox } from '@chakra-ui/react';
+import { loginWithPhone } from '../services/auth';
 
 function PhoneLogin() {
     const navigate = useNavigate();
@@ -25,8 +26,21 @@ function PhoneLogin() {
                 .matches(/[A-Z]/, "Password requires an uppercase letter")
                 .matches(/[^\w]/, "Password requires a special character"),
         }),
-        onSubmit: async (values) => {
-            console.log('vals', values)
+        onSubmit: async (values, { setSubmitting, setStatus }) => {
+            try {
+                setSubmitting(true);
+                setStatus(undefined);
+
+                await loginWithPhone(values.phoneNumber, values.password);
+
+                navigate('/');
+            } catch (error) {
+                const message = error?.message || 'Login failed';
+                setStatus(message);
+                console.error('Phone login error:', error);
+            } finally {
+                setSubmitting(false);
+            }
         },
     });
 
