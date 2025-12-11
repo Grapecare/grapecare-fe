@@ -27,6 +27,8 @@ function EmailLogin() {
         }),
         onSubmit: async (values) => {
             console.log('vals', values)
+            //route to dashboard
+            navigate('/dashboard')
         },
     });
 

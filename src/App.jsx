@@ -12,6 +12,9 @@ import Signup from './pages/auth/Signup'
 import ForgotPassword from './pages/auth/ForgotPassword'
 import PasswordReset from './pages/auth/PasswordReset'
 import VerifyAccount from './pages/auth/VerifyAccount'
+import Dashboard from './pages/Dashboard'
+import MainLayout from './layouts/MainLayout'
+import DashboardHome from './pages/DashboardHome'
 
 
 function App() {
@@ -28,6 +31,13 @@ function App() {
       <Route path='/forgot-password' element={<ForgotPassword />} />
       <Route path='/reset-password' element={<PasswordReset />} />
       <Route path='/verify-account' element={<VerifyAccount />} />
+      <Route path='/dashboard/*' 
+        element={
+          <MainLayout>
+            <DashboardHome />
+          </MainLayout>
+        } 
+      />
     </Routes>
   )
 }

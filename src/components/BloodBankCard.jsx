@@ -1,0 +1,42 @@
+import React from 'react'
+import Health from '../assets/images/healthRounded.svg'
+import { Button, Image } from '@chakra-ui/react'
+import BloodIcon from '../assets/icons/BloodIcon'
+import LocationIcon from '../assets/icons/LocationIcon'
+import TimeIcon from '../assets/icons/TimeIcon'
+
+
+function BloodBankCard() {
+    return (
+        <div className='bg-[#F4F4F580] rounded-[20px] p-5'>
+            <div className="flex items-center">
+                <Image src={Health} alt="health" boxSize='50px'/>
+                <div className="flex items-center gap-1">
+                    <h3 className="font-medium text-[#000000] text-xl"> General Hospital Blood Center</h3>
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.04948 0.146248C6.64792 -0.307462 5.12429 0.323638 4.45404 1.63554L3.64826 3.21271C3.55252 3.40011 3.40011 3.55252 3.21271 3.64826L1.63554 4.45404C0.323638 5.12429 -0.307462 6.64792 0.146248 8.04948L0.691708 9.73448C0.756518 9.93468 0.756518 10.1503 0.691708 10.3505L0.146248 12.0355C-0.307462 13.4371 0.323638 14.9607 1.63554 15.631L3.21271 16.4367C3.40011 16.5325 3.55252 16.6849 3.64826 16.8723L4.45404 18.4495C5.12429 19.7614 6.64792 20.3925 8.04948 19.9388L9.73448 19.3933C9.93468 19.3285 10.1503 19.3285 10.3505 19.3933L12.0355 19.9388C13.4371 20.3925 14.9607 19.7614 15.631 18.4495L16.4367 16.8723C16.5325 16.6849 16.6849 16.5325 16.8723 16.4367L18.4495 15.631C19.7614 14.9607 20.3925 13.4371 19.9388 12.0355L19.3933 10.3505C19.3285 10.1503 19.3285 9.93468 19.3933 9.73448L19.9388 8.04948C20.3925 6.64792 19.7614 5.12429 18.4495 4.45404L16.8723 3.64826C16.6849 3.55252 16.5325 3.40011 16.4367 3.21271L15.631 1.63554C14.9607 0.323638 13.4371 -0.307462 12.0355 0.146248L10.3505 0.691708C10.1503 0.756508 9.93468 0.756518 9.73448 0.691708L8.04948 0.146248ZM4.80225 9.79978L6.21647 8.38548L9.04488 11.214L14.7018 5.55713L16.116 6.97134L9.04488 14.0424L4.80225 9.79978Z" fill="#57C941" />
+                    </svg>
+                </div>
+            </div>
+            <div className="px-12 mb-8">
+                <div className="flex items-center gap-4">
+                    <BloodIcon/>
+                    <h3 className="text-[#333333E5] text-xl">0+</h3>
+                </div>
+                <div className="flex items-center gap-4">
+                    <LocationIcon/>
+                    <h3 className="text-[#333333E5] text-xl">52,Ajeigbe Bustop, Ringroad Ibadan, Oyo State.</h3>
+                </div>
+                <div className="flex items-center gap-4">
+                    <TimeIcon/>
+                    <h3 className="text-[#333333E5] text-xl">Availability: <span className=''>Open 24/7</span></h3>
+                </div>
+            </div>
+            <div className='flex justify-center'>
+                <Button color='#fff' bg='#0081DF' fontWeight={'700'}>Contact Now</Button>
+            </div>
+        </div>
+    )
+}
+
+export default BloodBankCard
