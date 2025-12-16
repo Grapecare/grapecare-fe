@@ -8,8 +8,12 @@ import appointment from '../assets/images/appointment.png'
 import { GiBlood } from 'react-icons/gi'
 import CampaignCard from '../components/CampaignCard'
 import HeroCards from '../components/HeroCards'
+import { useSelector } from 'react-redux'
 
 function Dashboard() {
+  //get current user data from redux persist
+  const {user} = useSelector((state) => state.auth)
+
   return (
     <div>
       <div className="flex justify-between mb-8">

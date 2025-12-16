@@ -5,10 +5,13 @@ import InputField from './InputField';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Checkbox } from '@chakra-ui/react';
 import { loginWithEmail } from '../services/auth';
+import { useDispatch } from 'react-redux';
+import { persistAuth } from '../redux/slices/authSlice';
 
 function EmailLogin() {
     const navigate = useNavigate();
     const [checkedItem, setCheckedItem] = React.useState(false);
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -31,8 +34,10 @@ function EmailLogin() {
                 setSubmitting(true);
                 setStatus(undefined);
 
-                await loginWithEmail(values.email, values.password);
+                const res = await loginWithEmail(values);
 
+                //after a successful login, persist user data
+                dispatch(persistAuth(res))
                 navigate('/');
             } catch (error) {
                 const message = error?.message || 'Login failed';
