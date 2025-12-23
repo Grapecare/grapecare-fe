@@ -1,22 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthLayout from '../../layouts/AuthLayout'
 import InputField from '../../components/InputField'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
-import { Link } from 'react-router-dom';
-import { Button } from '@chakra-ui/react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Button, useToast } from '@chakra-ui/react';
 
 function VerifyAccount() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const toast = useToast();
+    const [isLoading, setIsLoading] = useState(false);
+    
+    // Get email from signup page navigation state
+    const email = location.state?.email || '';
 
     const formik = useFormik({
         initialValues: {
-            email: "",
+            otp: "",
         },
         validationSchema: Yup.object({
-            email: Yup.string().email('Enter a valid email').required("Email is required"),
+            otp: Yup.string()
+                .required("Verification code is required")
+                .matches(/^[0-9]+$/, "Must be only digits")
+                .min(6, "Code must be 6 digits")
+                .max(6, "Code must be 6 digits"),
         }),
         onSubmit: async (values) => {
-            console.log('vals', values)
+            setIsLoading(true);
+            try {
+                // TODO: Implement OTP verification API call
+                // const response = await verifyOTP({ email, otp: values.otp });
+                
+                toast({
+                    title: 'Success',
+                    description: 'Account verified successfully',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                });
+                
+                // Navigate to personal info page (next step in flow)
+                navigate('/personal-info');
+            } catch (error) {
+                toast({
+                    title: 'Verification Failed',
+                    description: error.response?.data?.message || 'Invalid verification code',
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                });
+            } finally {
+                setIsLoading(false);
+            }
         },
     });
     return (
@@ -30,22 +66,27 @@ function VerifyAccount() {
                     onSubmit={formik.handleSubmit}
                     className='w-full'
                 >
+                    {email && (
+                        <div className='mb-4 text-center'>
+                            <p className='text-[#333333] text-sm'>Code sent to: <span className='font-semibold'>{email}</span></p>
+                        </div>
+                    )}
                     <div className=''>
-                        {/* change to OTP input */}
                         <InputField
-                            name="email"
-                            type="email"
-                            placeholder="Email"
-                            label="Email address"
+                            name="otp"
+                            type="text"
+                            placeholder="Enter 6-digit code"
+                            label="Verification Code"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.email}
-                            helperText={formik.touched.email && formik.errors.email}
-                            error={!!(formik.touched.email && formik.errors.email)}
+                            value={formik.values.otp}
+                            helperText={formik.touched.otp && formik.errors.otp}
+                            error={!!(formik.touched.otp && formik.errors.otp)}
+                            maxLength={6}
                         />
                     </div>
                     <Button
-                        // isLoading
+                        isLoading={isLoading}
                         type='submit'
                         bg='#EA1D78'
                         color='white'
@@ -53,7 +94,7 @@ function VerifyAccount() {
                         borderRadius="md"
                         mt={5}
                         mb={2}
-                    // py={6} 
+                        _hover={{ bg: '#D11A6B' }}
                     >
                         Verify
                     </Button>
