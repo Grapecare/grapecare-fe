@@ -9,8 +9,10 @@ import { GiBlood } from 'react-icons/gi'
 import CampaignCard from '../components/CampaignCard'
 import HeroCards from '../components/HeroCards'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
+  const navigate = useNavigate()
   //get current user data from redux persist
   const {user} = useSelector((state) => state.auth)
 
@@ -40,7 +42,9 @@ function Dashboard() {
       </div>
       <div className="flex justify-between mb-5">
         <h2 className='font-medium text-3xl text-[#004475]'>Our Charity Campaign </h2>
-        <Button color='#F93B99' bg='#fff' variant='outline' borderColor='#F93B99'>Create Cause</Button>
+        <Button color='#F93B99' bg='#fff' variant='outline' borderColor='#F93B99'
+          onClick={()=>navigate('/dashboard/create-cause')}
+        >Create Cause</Button>
       </div>
       <div className="">
         <h3 className='text-[#333333] font-medium text-xl'>Latest Campaigns</h3>

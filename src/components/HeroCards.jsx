@@ -14,7 +14,9 @@ function HeroCards() {
                 <div className="w-2/5 p-6">
                     <h2 className='text-white text-2xl font-semibold mb-3'>Do You Have a Blood Bank?</h2>
                     <p className="text-base font-medium text-white mb-6">You can join our platform to be contacted during urgent shortages.</p>
-                    <Button rightIcon={<ArrTopRight />} color='#005694' bg='#fff'>Get Started</Button>
+                    <Button rightIcon={<ArrTopRight />} color='#005694' bg='#fff'
+                        onClick={()=>navigate('/dashboard/get-started')}
+                    >Get Started</Button>
                 </div>
                 <div className="w-3/5">
                     <Image src={Doc} alt='get started' />
