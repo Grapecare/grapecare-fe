@@ -1,14 +1,16 @@
 import { useFormik } from 'formik';
-import React from 'react'
+import React, { useState } from 'react'
 import * as Yup from 'yup';
 import InputField from './InputField';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Checkbox } from '@chakra-ui/react';
+import { Button, Checkbox, useToast } from '@chakra-ui/react';
 import { loginWithPhone } from '../services/auth';
 
 function PhoneLogin() {
     const navigate = useNavigate();
-    const [checkedItem, setCheckedItem] = React.useState(false);
+    const toast = useToast();
+    const [checkedItem, setCheckedItem] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -26,20 +28,57 @@ function PhoneLogin() {
                 .matches(/[A-Z]/, "Password requires an uppercase letter")
                 .matches(/[^\w]/, "Password requires a special character"),
         }),
-        onSubmit: async (values, { setSubmitting, setStatus }) => {
+        onSubmit: async (values) => {
+            setIsLoading(true);
             try {
-                setSubmitting(true);
-                setStatus(undefined);
-
                 await loginWithPhone(values.phoneNumber, values.password);
-
-                navigate('/');
+                
+                toast({
+                    title: 'Login Successful',
+                    status: 'success',
+                    duration: 2000,
+                    isClosable: true,
+                });
+                
+                navigate('/dashboard/home');
             } catch (error) {
-                const message = error?.message || 'Login failed';
-                setStatus(message);
-                console.error('Phone login error:', error);
+                const errorCode = error.response?.data?.error_code;
+                const errorMessage = error.response?.data?.non_field_errors || 
+                                   error.response?.data?.phone_number ||
+                                   error.response?.data?.message || 
+                                   'Invalid phone number or password';
+                
+                // Check if error is about email verification using error code
+                if (errorCode === 'EMAIL_NOT_VERIFIED') {
+                    toast({
+                        title: 'Email Not Verified',
+                        description: 'Please verify your email to continue',
+                        status: 'warning',
+                        duration: 3000,
+                        isClosable: true,
+                    });
+                    
+                    // Route to verification page (phone login doesn't have email, so no state)
+                    navigate('/auth/verify-account');
+                } else if (errorCode === 'ACCOUNT_DEACTIVATED') {
+                    toast({
+                        title: 'Account Deactivated',
+                        description: errorMessage,
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                } else {
+                    toast({
+                        title: 'Login Failed',
+                        description: errorMessage,
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                }
             } finally {
-                setSubmitting(false);
+                setIsLoading(false);
             }
         },
     });
@@ -88,7 +127,7 @@ function PhoneLogin() {
                 </Checkbox>
                 <Link to='/forgot-password' className='text-[#004475] text-base font-semibold'>Forgot Password?</Link>
                 <Button
-                    // isLoading
+                    isLoading={isLoading}
                     type='submit'
                     bg='#EA1D78'
                     color='white'
@@ -96,7 +135,7 @@ function PhoneLogin() {
                     borderRadius="md" 
                     mt={5}
                     mb={2}
-                    // py={6} 
+                    _hover={{ bg: '#D11A6B' }}
                 >
                     Login
                 </Button>

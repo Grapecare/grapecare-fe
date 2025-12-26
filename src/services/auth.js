@@ -35,6 +35,16 @@ export const loginWithPhone = async (phoneNumber, password) => {
   return login({ phone_number: phoneNumber, password });
 };
 
+export const verifyEmail = async (email, code) => {
+  const { data } = await api.post('/auth/verify-email/', { email, code });
+  return data;
+};
+
+export const resendVerificationCode = async (email) => {
+  const { data } = await api.post('/auth/resend-verification/', { email });
+  return data;
+};
+
 export const logout = () => {
   // Clear localStorage
   localStorage.removeItem('accessToken');

@@ -1,13 +1,15 @@
 import React, { useState, useRef } from 'react'
 import AuthLayout from '../../layouts/AuthLayout'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, useToast, Input } from '@chakra-ui/react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button, useToast, Input, Link } from '@chakra-ui/react';
+import { verifyEmail, resendVerificationCode } from '../../services/auth';
 
 function VerifyAccount() {
     const location = useLocation();
     const navigate = useNavigate();
     const toast = useToast();
     const [isLoading, setIsLoading] = useState(false);
+    const [isResending, setIsResending] = useState(false);
     const [otp, setOtp] = useState(['', '', '', '', '']);
     const inputRefs = useRef([]);
     
@@ -46,16 +48,71 @@ function VerifyAccount() {
         }
     };
 
+    const handleResendCode = async () => {
+        if (!email) {
+            toast({
+                title: 'Email Required',
+                description: 'Please provide an email address to resend code',
+                status: 'warning',
+                duration: 5000,
+                isClosable: true,
+            });
+            return;
+        }
+
+        setIsResending(true);
+        try {
+            await resendVerificationCode(email);
+            
+            toast({
+                title: 'Code Resent',
+                description: 'A new verification code has been sent to your email',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            });
+            
+            // Clear OTP inputs
+            setOtp(['', '', '', '', '']);
+            inputRefs.current[0]?.focus();
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || 
+                               error.response?.data?.email?.[0] ||
+                               'Failed to resend verification code';
+            
+            toast({
+                title: 'Resend Failed',
+                description: errorMessage,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            });
+        } finally {
+            setIsResending(false);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const otpCode = otp.join('');
+        
+        if (!email) {
+            toast({
+                title: 'Email Required',
+                description: 'Please provide an email address',
+                status: 'warning',
+                duration: 5000,
+                isClosable: true,
+            });
+            return;
+        }
         
         if (otpCode.length !== 5) {
             toast({
                 title: 'Invalid Code',
                 description: 'Please enter all 5 digits',
                 status: 'warning',
-                duration: 3000,
+                duration: 5000,
                 isClosable: true,
             });
             return;
@@ -63,23 +120,26 @@ function VerifyAccount() {
 
         setIsLoading(true);
         try {
-            // TODO: Implement OTP verification API call
-            // const response = await verifyOTP({ email, otp: otpCode });
+            await verifyEmail(email, otpCode);
             
             toast({
-                title: 'Success',
-                description: 'Account verified successfully',
+                title: 'Email Verified',
+                description: 'Your email has been verified successfully',
                 status: 'success',
-                duration: 3000,
+                duration: 5000,
                 isClosable: true,
             });
             
-            // Navigate to personal info page (next step in flow)
-            navigate('/personal-info');
+            // Navigate to login page after successful verification
+            navigate('/login');
         } catch (error) {
+            const errorMessage = error.response?.data?.message || 
+                               error.response?.data?.code?.[0] ||
+                               'Invalid or expired verification code';
+            
             toast({
                 title: 'Verification Failed',
-                description: error.response?.data?.message || 'Invalid verification code',
+                description: errorMessage,
                 status: 'error',
                 duration: 5000,
                 isClosable: true,
@@ -151,8 +211,16 @@ function VerifyAccount() {
                     >
                         Verify
                     </Button>
-                    <h3 className="text-[#333333] text-base font-normal text-center">Didn't receive the verification code?{' '}
-                        <Link to='/signup' className='text-[#004475] font-semibold underline'>Resend Code</Link>
+                    <h3 className="text-[#333333] text-base font-normal text-center">
+                        Didn't receive the verification code?{' '}
+                        <Link 
+                            type="button"
+                            onClick={handleResendCode}
+                            disabled={isResending}
+                            className='text-[#004475] font-semibold underline  transition-colors'
+                        >
+                            {isResending ? 'Sending...' : 'Resend Code'}
+                        </Link>
                     </h3>
                 </form>
             </div>
