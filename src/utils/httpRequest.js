@@ -1,7 +1,6 @@
 import axios from 'axios';
 import storeInit from "../redux/store"
 import { removeUser } from '../redux/slices/authSlice';
-import { useDispatch } from 'react-redux';
 
 const httpRequest = async (url, method = 'get', body = null, contentType = "application/json", others) => {
     const token = storeInit.store.getState()?.auth?.user?.token;

@@ -1,41 +1,46 @@
-const baseUrl = import.meta.env.VITE_BASE_URL;
+import api from './api';
+import storeInit from '../redux/store';
+import { persistAuth, removeUser } from '../redux/slices/authSlice';
 
 export const register = async (payload) => {
-    return await httpRequest(`${baseUrl}/register`,'POST',payload)
-} 
+  const { data } = await api.post('/auth/signup/', payload);
+  return data;
+};
 
 export const login = async (payload) => {
-    return await httpRequest(`${baseUrl}/auth/login`,'POST',payload)
-} 
-
-
-import httpRequest from '../utils/httpRequest';
-// Simple auth service for login
-
-import api from './api';
-
-async function loginRequest(payload) {
   const { data } = await api.post('/auth/login/', payload);
 
+  // Store tokens in localStorage for API interceptor
   if (data?.tokens) {
     localStorage.setItem('accessToken', data.tokens.access);
     localStorage.setItem('refreshToken', data.tokens.refresh);
   }
-  if (data?.user) {
-    localStorage.setItem('user', JSON.stringify(data.user));
+
+  // Dispatch to Redux to persist user and token
+  if (data) {
+    storeInit.store.dispatch(persistAuth({
+      user: data.user,
+      accessToken: data.tokens?.access,
+    }));
   }
 
   return data;
-}
+};
 
-// export function loginWithEmail(email, password) {
-//   return loginRequest({ email, password });
-// }
+export const loginWithEmail = async (email, password) => {
+  return login({ email, password });
+};
 
-export const loginWithEmail = async (payload) => {
-  return await httpRequest(`${baseUrl}/auth/login`,'POST',payload)
-}
+export const loginWithPhone = async (phoneNumber, password) => {
+  return login({ phone_number: phoneNumber, password });
+};
 
-export function loginWithPhone(phoneNumber, password) {
-  return loginRequest({ phone_number: phoneNumber, password });
-}
+export const logout = () => {
+  // Clear localStorage
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('user');
+  
+  // Clear Redux state
+  storeInit.store.dispatch(removeUser());
+};

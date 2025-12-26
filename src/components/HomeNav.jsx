@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import grapeIcon from '../assets/images/grapeIcon.svg'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
+import { useSelector } from 'react-redux'
+import { logout } from '../services/auth'
 
 const navMenu = [
     {
@@ -24,14 +26,12 @@ const navMenu = [
 ]
 function HomeNav() {
     const [isOpen, setIsOpen] = useState(false);
-
     const navigate = useNavigate();
-    const isAuthenticated = !!localStorage.getItem('accessToken');
+    const { token } = useSelector((state) => state.auth);
+    const isAuthenticated = !!token;
 
     const handleLogout = () => {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('user');
+        logout();
         navigate('/login');
     };
     return (
