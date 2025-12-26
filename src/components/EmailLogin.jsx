@@ -2,12 +2,13 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react'
 import * as Yup from 'yup';
 import InputField from './InputField';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button, Checkbox, useToast } from '@chakra-ui/react';
 import { loginWithEmail } from '../services/auth';
 
 function EmailLogin() {
     const navigate = useNavigate();
+    const location = useLocation();
     const toast = useToast();
     const [checkedItem, setCheckedItem] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +41,9 @@ function EmailLogin() {
                     isClosable: true,
                 });
                 
-                navigate('/dashboard/home');
+                // Redirect to the page they were trying to access, or dashboard
+                const from = location.state?.from?.pathname || '/dashboard/home';
+                navigate(from, { replace: true });
             } catch (error) {
                 const errorCode = error.response?.data?.error_code;
                 const errorMessage = error.response?.data?.non_field_errors || 

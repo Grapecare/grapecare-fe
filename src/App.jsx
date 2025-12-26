@@ -12,6 +12,7 @@ import VerifyAccount from './pages/auth/VerifyAccount'
 import Dashboard from './pages/Dashboard'
 import MainLayout from './layouts/MainLayout'
 import DashboardHome from './pages/DashboardHome'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/welcome' element={<Welcome />} />
-      <Route path='/blood-bank' element={<Bloodbank />} />
+      {/* <Route path='/blood-bank' element={<Bloodbank />} /> */}
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/onboarding' element={<OnboardingCarousel />} />
@@ -28,9 +29,11 @@ function App() {
       <Route path='/verify-account' element={<VerifyAccount />} />
       <Route path='/dashboard/*' 
         element={
-          <MainLayout>
-            <DashboardHome />
-          </MainLayout>
+          <ProtectedRoute>
+            <MainLayout>
+              <DashboardHome />
+            </MainLayout>
+          </ProtectedRoute>
         } 
       />
     </Routes>
