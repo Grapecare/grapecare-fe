@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import DashBoardIcon from '../assets/icons/DashBoardIcon'
 import BloodBankIcon from '../assets/icons/BloodBankIcon'
 import SaveSoulIcon from '../assets/icons/SaveSoulIcon'
@@ -7,6 +7,7 @@ import HealthPlanIcon from '../assets/icons/HealthPlanIcon'
 import TeleConsultIcon from '../assets/icons/TeleConsultIcon'
 import ProfileIcon from '../assets/icons/ProfileIcon'
 import LogoutIcon from '../assets/icons/LogoutIcon'
+import { logout } from '../services/auth'
 
 const navMenu = [
   {
@@ -37,6 +38,14 @@ const navMenu = [
 ]
 
 function MainSideBar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+  
   return (
     <div className='w-[15%] bg-[#EEF8FF80] fixed top-25 left-0 bottom-0'>
       <nav>
@@ -44,21 +53,17 @@ function MainSideBar() {
           {
             navMenu.map((nav, index) => {
               const Icon = nav.icon;
+              const isActive = location.pathname === nav.path || location.pathname.startsWith(nav.path + '/');
+              
               return (
                 <li key={index}>
                   <NavLink
                     to={nav.path}
-                    className={({ isActive }) =>
-                      `flex items-center gap-5 px-5 py-4 text-base rounded-r-lg rounded-tl-xl
-                      ${isActive ? 'bg-[#EA1D78] text-white shadow-[0_4px_10px_#00000040]' : 'text-[#333333] hover:bg-gray-100'}`
-                    }
+                    className={`flex items-center gap-5 px-5 py-4 text-base rounded-r-lg rounded-tl-xl
+                      ${isActive ? 'bg-[#EA1D78] text-white shadow-[0_4px_10px_#00000040]' : 'text-[#333333] hover:bg-gray-100'}`}
                   >
-                    {({ isActive }) => (
-                      <>
-                        <Icon color={isActive ? "white" : "#EA1D78"} />
-                        <span>{nav.name}</span>
-                      </>
-                    )}
+                    <Icon color={isActive ? "white" : "#EA1D78"} />
+                    <span>{nav.name}</span>
                   </NavLink>
                 </li>
               )
@@ -67,23 +72,27 @@ function MainSideBar() {
           <li className='border-t-2 border-[#33333333]'>
             <NavLink
               to='/profile'
-              className='flex items-center gap-5 px-5 py-4 text-base rounded-r-lg rounded-tl-xl'
+              className={({ isActive }) =>
+                `flex items-center gap-5 px-5 py-4 text-base rounded-r-lg rounded-tl-xl
+                ${isActive ? 'bg-[#EA1D78] text-white shadow-[0_4px_10px_#00000040]' : 'text-[#333333] hover:bg-gray-100'}`
+              }
             >
-              <>
-                <ProfileIcon/>
-                <span>Profile</span>
-              </>
+              {({ isActive }) => (
+                <>
+                  <ProfileIcon color={isActive ? "white" : "#EA1D78"} />
+                  <span>Profile</span>
+                </>
+              )}
             </NavLink>
           </li>
           <li>
             <NavLink
-              to='/profile'
-              className='flex items-center gap-5 px-5 py-4 text-base rounded-r-lg rounded-tl-xl'
+              to='/login'
+              onClick={handleLogout}
+              className='flex items-center gap-5 px-5 py-4 text-base rounded-r-lg rounded-tl-xl w-full text-left text-[#333333] hover:bg-gray-100 transition-colors'
             >
-              <>
-                <LogoutIcon/>
-                <span>Logout</span>
-              </>
+              <LogoutIcon/>
+              <span>Logout</span>
             </NavLink>
           </li>
         </ul>
