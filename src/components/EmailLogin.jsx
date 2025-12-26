@@ -1,13 +1,17 @@
 import { useFormik } from 'formik';
-import React from 'react'
+import React, { useState } from 'react'
 import * as Yup from 'yup';
 import InputField from './InputField';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button, Checkbox } from '@chakra-ui/react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Button, Checkbox, useToast } from '@chakra-ui/react';
+import { loginWithEmail } from '../services/auth';
 
 function EmailLogin() {
     const navigate = useNavigate();
-    const [checkedItem, setCheckedItem] = React.useState(false);
+    const location = useLocation();
+    const toast = useToast();
+    const [checkedItem, setCheckedItem] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -26,7 +30,63 @@ function EmailLogin() {
                 .matches(/[^\w]/, "Password requires a special character"),
         }),
         onSubmit: async (values) => {
-            console.log('vals', values)
+            setIsLoading(true);
+            try {
+                await loginWithEmail(values.email, values.password);
+                
+                toast({
+                    title: 'Login Successful',
+                    status: 'success',
+                    duration: 2000,
+                    isClosable: true,
+                });
+                
+                // Redirect to the page they were trying to access, or dashboard
+                const from = location.state?.from?.pathname || '/dashboard/home';
+                navigate(from, { replace: true });
+            } catch (error) {
+                const errorCode = error.response?.data?.error_code;
+                const errorMessage = error.response?.data?.non_field_errors || 
+                                   error.response?.data?.email ||
+                                   error.response?.data?.message || 
+                                   'Invalid email or password';
+
+                console.log('Error code:', errorCode, 'Error message:', errorMessage);
+                
+                // Check if error is about email verification using error code
+                if (errorCode === 'EMAIL_NOT_VERIFIED') {
+                    toast({
+                        title: 'Email Not Verified',
+                        description: 'Please verify your email to continue',
+                        status: 'warning',
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                    
+                    // Route to verification page with email
+                    navigate('/verify-account', { 
+                        state: { email: values.email } 
+                    });
+                } else if (errorCode === 'ACCOUNT_DEACTIVATED') {
+                    toast({
+                        title: 'Account Deactivated',
+                        description: errorMessage,
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                } else {
+                    toast({
+                        title: 'Login Failed',
+                        description: errorMessage,
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                }
+            } finally {
+                setIsLoading(false);
+            }
         },
     });
 
@@ -74,7 +134,7 @@ function EmailLogin() {
                 </Checkbox>
                 <Link to='/forgot-password' className='text-[#004475] text-base font-semibold'>Forgot Password?</Link>
                 <Button
-                    // isLoading
+                    isLoading={isLoading}
                     type='submit'
                     bg='#EA1D78'
                     color='white'
@@ -82,7 +142,7 @@ function EmailLogin() {
                     borderRadius="md" 
                     mt={5}
                     mb={2}
-                    // py={6} 
+                    _hover={{ bg: '#D11A6B' }}
                 >
                     Login
                 </Button>

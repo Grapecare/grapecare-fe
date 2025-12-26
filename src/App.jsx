@@ -1,7 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Button } from '@chakra-ui/react'
+import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Login from './pages/auth/Login'
@@ -12,22 +9,33 @@ import Signup from './pages/auth/Signup'
 import ForgotPassword from './pages/auth/ForgotPassword'
 import PasswordReset from './pages/auth/PasswordReset'
 import VerifyAccount from './pages/auth/VerifyAccount'
+import Dashboard from './pages/Dashboard'
+import MainLayout from './layouts/MainLayout'
+import DashboardHome from './pages/DashboardHome'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <Routes>
       <Route path='/' element={<HomePage />} />
       <Route path='/welcome' element={<Welcome />} />
-      <Route path='/blood-bank' element={<Bloodbank />} />
+      {/* <Route path='/blood-bank' element={<Bloodbank />} /> */}
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/onboarding' element={<OnboardingCarousel />} />
       <Route path='/forgot-password' element={<ForgotPassword />} />
       <Route path='/reset-password' element={<PasswordReset />} />
       <Route path='/verify-account' element={<VerifyAccount />} />
+      <Route path='/dashboard/*' 
+        element={
+          <ProtectedRoute>
+            <MainLayout>
+              <DashboardHome />
+            </MainLayout>
+          </ProtectedRoute>
+        } 
+      />
     </Routes>
   )
 }

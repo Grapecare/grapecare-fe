@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ErrorMessage } from 'formik'
 
-function InputField({readOnly=false, type, name, placeholder, label, Icon, onChange, onBlur, value, helperText, error }) {
+function InputField({readOnly=false, type, name, placeholder, label, Icon, onChange, onBlur, value, helperText, error, required=false }) {
     const [show, setShow] = useState(false)
 
     const toggleShow = () => {
@@ -17,7 +17,7 @@ function InputField({readOnly=false, type, name, placeholder, label, Icon, onCha
                     htmlFor={name} 
                     className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'
                 >
-                    {label}
+                    {label}{required && <span className='text-[#8C0F41]'>*</span>}
                 </label>
                 <input
                     className='appearance-none bg-[#EEF8FF4D] text-[#333333CC] border-[#CBD5E1] border rounded-[10px] w-full h-[53px] py-2 px-[25px] placeholder:text-sm placeholder:text-[#333333CC] text-base'
