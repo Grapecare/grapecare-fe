@@ -63,6 +63,33 @@ export const resetPassword = async (payload) => {
   return data;
 };
 
+export const verifyToken = async (token) => {
+  // Verify if a token is valid
+  const { data } = await api.post('/api/auth/token/verify/', { token });
+  return data;
+};
+
+export const refreshToken = async (refreshToken) => {
+  // Get a new access token using refresh token
+  const { data } = await api.post('/api/auth/token/refresh/', { refresh: refreshToken });
+  
+  // Update tokens in localStorage
+  if (data?.access) {
+    localStorage.setItem('accessToken', data.access);
+    
+    // Update Redux store
+    const currentUser = storeInit.store.getState()?.auth?.user;
+    if (currentUser) {
+      storeInit.store.dispatch(persistAuth({
+        user: currentUser,
+        accessToken: data.access,
+      }));
+    }
+  }
+  
+  return data;
+};
+
 export const logout = () => {
   // Clear localStorage
   localStorage.removeItem('accessToken');
