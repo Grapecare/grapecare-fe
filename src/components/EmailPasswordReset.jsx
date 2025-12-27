@@ -1,11 +1,16 @@
 import { useFormik } from 'formik';
-import React from 'react'
+import React, { useState } from 'react'
 import * as Yup from 'yup';
 import InputField from './InputField';
-import { Link } from 'react-router-dom';
-import { Button } from '@chakra-ui/react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, useToast } from '@chakra-ui/react';
+import { forgotPassword } from '../services/auth';
 
 function EmailPasswordReset() {
+    const navigate = useNavigate();
+    const toast = useToast();
+    const [isLoading, setIsLoading] = useState(false);
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -14,7 +19,43 @@ function EmailPasswordReset() {
             email: Yup.string().email('Enter a valid email').required("Email is required"),
         }),
         onSubmit: async (values) => {
-            console.log('vals', values)
+            setIsLoading(true);
+            try {
+                await forgotPassword({
+                    email: values.email,
+                    send_via: 'email'
+                });
+
+                toast({
+                    title: 'Reset Code Sent',
+                    description: 'A password reset code has been sent to your email',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+
+                // Navigate to verification page with email and password reset flag
+                navigate('/verify-account', {
+                    state: { 
+                        email: values.email,
+                        isPasswordReset: true 
+                    }
+                });
+            } catch (error) {
+                const errorMessage = error.response?.data?.message ||
+                                   error.response?.data?.email?.[0] ||
+                                   'Failed to send reset code';
+
+                toast({
+                    title: 'Request Failed',
+                    description: errorMessage,
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                });
+            } finally {
+                setIsLoading(false);
+            }
         },
     });
 
@@ -38,7 +79,7 @@ function EmailPasswordReset() {
                     />
                 </div>
                 <Button
-                    // isLoading
+                    isLoading={isLoading}
                     type='submit'
                     bg='#EA1D78'
                     color='white'
@@ -46,7 +87,7 @@ function EmailPasswordReset() {
                     borderRadius="md" 
                     mt={5}
                     mb={2}
-                    // py={6} 
+                    _hover={{ bg: '#D11A6B' }}
                 >
                     Send Verification Code
                 </Button>
