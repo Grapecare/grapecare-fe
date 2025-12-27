@@ -1,19 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageHeader from '../components/PageHeader'
 import { useFormik } from 'formik';
 import InputField from '../components/InputField';
-import { Button, Checkbox, Stack, Text } from '@chakra-ui/react';
+import { Button, Checkbox, Stack, Text, useToast } from '@chakra-ui/react';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BiUpload } from 'react-icons/bi';
 import UploadIcon from '../assets/icons/UploadIcon';
-
-const bloodTypes = ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-']
+import { getBloodTypes, registerBloodDonor } from '../services/bloodDonor';
 const medicalHistoryOptions = ['Anemia', 'Heart Disease', 'Diabetes', 'High Blood Pressure', 'Asthma', 'Epilepsy', 'Hepatitis', 'HIV/AIDS', 'Tuberculosis', 'Cancer', 'Kidney Disease', 'Liver Disease', 'Thyroid Disease']
 
 function DonateBlood() {
+    const navigate = useNavigate();
+    const toast = useToast();
     const [checkedItem, setCheckedItem] = useState(false)
     const [files, setFiles] = useState([]);
+    const [bloodTypes, setBloodTypes] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Fetch blood types on component mount
+    useEffect(() => {
+        const fetchBloodTypes = async () => {
+            try {
+                const response = await getBloodTypes();
+                // Extract the data array from the response
+                setBloodTypes(response.data || []);
+            } catch (error) {
+                console.error('Failed to fetch blood types:', error);
+                
+                // Check if it's an authentication error
+                if (error.response?.status === 401) {
+                    toast({
+                        title: 'Authentication Required',
+                        description: 'Please log in to access this page',
+                        status: 'warning',
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                    navigate('/login');
+                } else {
+                    toast({
+                        title: 'Error',
+                        description: 'Failed to load blood types. Please try again.',
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                }
+            }
+        };
+        fetchBloodTypes();
+    }, [toast, navigate]);
 
     const formik = useFormik({
         initialValues: {
@@ -34,7 +71,64 @@ function DonateBlood() {
             weight: Yup.number().required("Field is required").min(50, 'Weight must be at least 50kg'),
         }),
         onSubmit: async (values) => {
-            console.log('vals', values)
+            if (files.length === 0) {
+                toast({
+                    title: 'ID Proof Required',
+                    description: 'Please upload your ID proof document',
+                    status: 'warning',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                return;
+            }
+
+            setIsLoading(true);
+            try {
+                // Create FormData for file upload
+                const formData = new FormData();
+                formData.append('blood_type_id', values.bloodType);
+                formData.append('has_donated_before', values.previouslyDonated || false);
+                if (values.donationDate) {
+                    formData.append('last_donation_date', values.donationDate);
+                }
+                formData.append('weight', values.weight);
+                formData.append('medical_conditions', JSON.stringify(values.medicalHistory));
+                formData.append('major_surgery_last_6_months', values.surgery || false);
+                formData.append('pregnancy_delivery_last_6_months', values.pregnancy || false);
+                formData.append('consumed_alcohol_last_24_hours', values.alcohol || false);
+                formData.append('smoked_last_12_hours', values.smoked || false);
+                formData.append('preferred_donation_type', values.donationType || 'any');
+                formData.append('available_days', values.availableDays || '');
+                formData.append('id_proof_document', files[0]);
+                formData.append('consent_given', checkedItem);
+
+                await registerBloodDonor(formData);
+
+                toast({
+                    title: 'Registration Successful',
+                    description: 'You have been registered as a blood donor successfully',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+
+                // Navigate to success page or dashboard
+                navigate('/dashboard/blood-bank');
+            } catch (error) {
+                const errorMessage = error.response?.data?.message ||
+                                   error.response?.data?.detail ||
+                                   'Failed to register as blood donor';
+
+                toast({
+                    title: 'Registration Failed',
+                    description: errorMessage,
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                });
+            } finally {
+                setIsLoading(false);
+            }
         },
     });
 
@@ -55,10 +149,10 @@ function DonateBlood() {
         setFiles((prev) => [...prev, ...newFiles]);
       };
     
-      // Remove file by index
-      const removeFile = (index) => {
-        setFiles((prev) => prev.filter((_, i) => i !== index));
-      };
+    //   // Remove file by index
+    //   const removeFile = (index) => {
+    //     setFiles((prev) => prev.filter((_, i) => i !== index));
+    //   };
     return (
         <div>
             <PageHeader title="Be a Voluntary Donor" />
@@ -83,8 +177,8 @@ function DonateBlood() {
                         >
                             <option value="">Select Blood Type</option>
                             {bloodTypes.map((type) => (
-                                <option key={type} value={type}>
-                                    {type}
+                                <option key={type.id} value={type.id}>
+                                    {type.name}
                                 </option>
                             ))}
                         </select>
@@ -284,23 +378,23 @@ function DonateBlood() {
                             </label>
                             <Stack spacing={[1, 2]} direction={['column', 'column']}>
                                 <Checkbox
-                                    isChecked={formik.values.donationType === 'Plasma'}
-                                    onChange={() => formik.setFieldValue('donationType', 'Plasma')}
+                                    isChecked={formik.values.donationType === 'plasma'}
+                                    onChange={() => formik.setFieldValue('donationType', 'plasma')}
                                     gap={2}
                                 >
                                     <Text fontSize={['base']} color='#333333' >Plasma</Text>
                                 </Checkbox>
                                 <Checkbox
-                                    isChecked={formik.values.donationType === 'Platelets'}
-                                    onChange={(e) => formik.setFieldValue('donationType', 'Platelets')}
+                                    isChecked={formik.values.donationType === 'platelets'}
+                                    onChange={(e) => formik.setFieldValue('donationType', 'platelets')}
                                     alignItems='center'
                                     gap={2}
                                 >
                                     <Text fontSize={['base']} color='#333333'>Platelets</Text>
                                 </Checkbox>
                                 <Checkbox
-                                    isChecked={formik.values.donationType === 'Any'}
-                                    onChange={(e) => formik.setFieldValue('donationType', 'Any')}
+                                    isChecked={formik.values.donationType === 'any'}
+                                    onChange={(e) => formik.setFieldValue('donationType', 'any')}
                                     alignItems='center'
                                     gap={2}
                                 >
@@ -371,7 +465,7 @@ function DonateBlood() {
                         </Checkbox>
                     </div>
                     <Button
-                        // isLoading
+                        isLoading={isLoading}
                         type='submit'
                         bg='#EA1D78'
                         color='white'
@@ -380,6 +474,7 @@ function DonateBlood() {
                         mt={5}
                         mb={2}
                         disabled={!checkedItem}
+                        _hover={{ bg: '#D11A6B' }}
                     >
                         Send Request
                     </Button>
