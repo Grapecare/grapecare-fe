@@ -3,6 +3,7 @@ import PageHeader from '../components/PageHeader'
 import { Button, Image } from '@chakra-ui/react'
 import ArrTopRight from '../assets/icons/ArrTopRight'
 import ConsultantCard from '../components/ConsultantCard'
+import { useNavigate } from 'react-router-dom'
 
 
 const specialists = [
@@ -20,6 +21,7 @@ const specialists = [
     },
 ]
 function TeleConsulting() {
+    const navigate = useNavigate()
     return (
         <div>
             <PageHeader title="Teleconsulting" />
@@ -33,7 +35,7 @@ function TeleConsulting() {
                     </h3>
                     <Button
                         w='100%'
-                        // onClick={handleSubmit}
+                        onClick={()=>navigate('/dashboard/register-doctor')}
                         rightIcon={<ArrTopRight color='#fff' />} color='#fff' bg='#F93B99'
                     >Register Now</Button>
                 </div>

@@ -14,7 +14,7 @@ function PageHeader({ title, showCauseBtn = false }) {
         <div className="flex justify-between items-center">
             <div>
                 <div className="">
-                    <h2 className='font-bold text-3xl text-[#333333]'>{title}</h2>
+                    <h2 className='font-bold md:text-3xl text-2xl text-[#333333]'>{title}</h2>
                 </div>
                 <Breadcrumb spacing='8px' mb={8} separator={<ChevronRightIcon color='gray.500' />}>
                     <MdDashboard />

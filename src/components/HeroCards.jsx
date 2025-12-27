@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 function HeroCards() {
     const navigate = useNavigate()
     return (
-        <div className='flex justify-between gap-6 mb-10'>
+        <div className='flex flex-col md:flex-row justify-between gap-6 mb-10'>
             <div className="rounded-2xl bg-gradient-to-b from-[#005694] via-[#005694] to-[#001B2E] flex">
                 <div className="w-2/5 p-6">
                     <h2 className='text-white text-2xl font-semibold mb-3'>Do You Have a Blood Bank?</h2>
