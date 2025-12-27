@@ -24,7 +24,7 @@ function ConsultantCard() {
         <h3 className="font-medium text-xl">Cardiologist</h3>
         <p className="text-xl text-[#333333E5]">4 Year Experience</p>
         <p className="text-[#0066B4] font-semibold text-xl">₦5,000</p>
-        <Link t0='' className='text-[#F93B99] text-base font-semibold underline'>Book Appointment</Link>
+        <Link to='/dashboard/book-appointment' className='text-[#F93B99] text-base font-semibold underline'>Book Appointment</Link>
       </div>
     </div>
   )

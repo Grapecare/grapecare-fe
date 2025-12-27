@@ -8,7 +8,7 @@ function MainLayout({children}) {
         <MainNav/>
         <div className='relative h-full'>
             <MainSideBar/>
-            <div className='flex relative flex-col px-1 h-full left-62 pt-3.5 w-[80%] z-20 pb-5'>
+            <div className='flex relative flex-col px-1 h-full md:left-62 pt-3.5 w-[100%] md:w-[80%] z-20 pb-5 px-4'>
                 {children}
             </div>
         </div>

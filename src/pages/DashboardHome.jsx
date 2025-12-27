@@ -8,6 +8,8 @@ import GetStarted from './GetStarted'
 import CreateCause from './CreateCause'
 import CampaignDetails from './CampaignDetails'
 import TeleConsulting from './TeleConsulting'
+import RegisterDoctor from './RegisterDoctor'
+import BookAppointment from './BookAppointment'
 
 function DashboardHome() {
   return (
@@ -17,9 +19,11 @@ function DashboardHome() {
       <Route path='/save-a-soul' element={<SaveASoul />} />
       <Route path='/donate' element={<DonateBlood />} />
       <Route path='/get-started' element={<GetStarted />} />
+      <Route path='/register-doctor' element={<RegisterDoctor />} />
       <Route path='/create-cause' element={<CreateCause />} />
       <Route path='/tele-consultation' element={<TeleConsulting />} />
       <Route path='/save-a-soul/:id' element={<CampaignDetails />} />
+      <Route path='/book-appointment' element={<BookAppointment />} />
     </Routes>
   )
 }

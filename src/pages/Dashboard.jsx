@@ -19,18 +19,18 @@ function Dashboard() {
   return (
     <div>
       <div className="flex justify-between mb-8">
-        <h2 className='font-bold text-3xl text-[#333333]'>Dashboard</h2>
-        <Button color='#fff' bg='#EA1D78'>Find Donor</Button>
+        <h2 className='font-bold text-xl md:text-3xl text-[#333333]'>Dashboard</h2>
+        <Button color='#fff' bg='#EA1D78' className='text-base'>Find Donor</Button>
       </div>
       <HeroCards />
-      <div className="flex justify-between gap-5 mb-8">
-        <div className="w-8/12 border border-[#33333380] rounded-[20px] px-6 py-9">
+      <div className="flex flex-col md:flex-row justify-between gap-5 mb-8">
+        <div className="w-full md:w-8/12 border border-[#33333380] rounded-[20px] px-6 py-9">
           <div className="w-2/5">
             <h2 className="mb-4 text-xl font-medium text-[#333333]">Discover Affordable, High-quality Treatment Options for You and Your Family.</h2>
             <Button color='#fff' bg='#EA1D78'>Explore Health Plans</Button>
           </div>
         </div>
-        <div className="w-4/12 border border-[#33333380] rounded-[20px] px-6 py-9 flex flex-col items-center">
+        <div className="w-full md:w-4/12 border border-[#33333380] rounded-[20px] px-6 py-9 flex flex-col items-center">
           <h2 className='text-[#333333CC] text-2xl mb-3'>Health Plan Status:</h2>
           <h2 className='text-[#333333] text-3xl font-semibold mb-6'>Inactive</h2>
           <span className="w-16 h-16 rounded-full bg-[#F93B99] flex justify-center items-center">
@@ -54,7 +54,7 @@ function Dashboard() {
         <div className="flex justify-center mb-10">
           <Button color='#F93B99' bg='#fff' variant='outline' borderColor='#F93B99'>See All</Button>
         </div>
-        <div className="flex justify-between gap-5 mb-8">
+        <div className="flex flex-col md:flex-row justify-between gap-5 mb-8">
           <div className="w-[60%] border border-[#33333380] rounded-[20px] px-6 py-9 flex">
             <div className="w-5/12">
               <h2 className="mb-4 text-xl font-medium text-[#333333]">Feeling unwell? Get Diagnosed and Treated Today - Schedule a Call With a Doctor.</h2>
