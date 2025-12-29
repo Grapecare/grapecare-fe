@@ -45,6 +45,51 @@ export const resendVerificationCode = async (email) => {
   return data;
 };
 
+export const forgotPassword = async (payload) => {
+  // payload can be { email, send_via: 'email' } or { phone_number, send_via: 'sms' }
+  const { data } = await api.post('/auth/forgot-password/', payload);
+  return data;
+};
+
+export const verifyResetCode = async (payload) => {
+  // payload can be { email, code } or { phone_number, code }
+  const { data } = await api.post('/auth/verify-reset-code/', payload);
+  return data;
+};
+
+export const resetPassword = async (payload) => {
+  // payload: { email/phone_number, code, password, confirm_password }
+  const { data } = await api.post('/auth/reset-password/', payload);
+  return data;
+};
+
+export const verifyToken = async (token) => {
+  // Verify if a token is valid
+  const { data } = await api.post('/api/auth/token/verify/', { token });
+  return data;
+};
+
+export const refreshToken = async (refreshToken) => {
+  // Get a new access token using refresh token
+  const { data } = await api.post('/api/auth/token/refresh/', { refresh: refreshToken });
+  
+  // Update tokens in localStorage
+  if (data?.access) {
+    localStorage.setItem('accessToken', data.access);
+    
+    // Update Redux store
+    const currentUser = storeInit.store.getState()?.auth?.user;
+    if (currentUser) {
+      storeInit.store.dispatch(persistAuth({
+        user: currentUser,
+        accessToken: data.access,
+      }));
+    }
+  }
+  
+  return data;
+};
+
 export const logout = () => {
   // Clear localStorage
   localStorage.removeItem('accessToken');

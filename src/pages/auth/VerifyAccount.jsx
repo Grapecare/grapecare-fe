@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import AuthLayout from '../../layouts/AuthLayout'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, useToast, Input, Link } from '@chakra-ui/react';
-import { verifyEmail, resendVerificationCode } from '../../services/auth';
+import { verifyEmail, resendVerificationCode, verifyResetCode } from '../../services/auth';
 
 function VerifyAccount() {
     const location = useLocation();
@@ -13,8 +13,10 @@ function VerifyAccount() {
     const [otp, setOtp] = useState(['', '', '', '', '']);
     const inputRefs = useRef([]);
     
-    // Get email from signup page navigation state
+    // Get data from navigation state
     const email = location.state?.email || '';
+    const phoneNumber = location.state?.phoneNumber || '';
+    const isPasswordReset = location.state?.isPasswordReset || false;
 
     const handleChange = (index, value) => {
         // Only allow digits
@@ -96,10 +98,10 @@ function VerifyAccount() {
         e.preventDefault();
         const otpCode = otp.join('');
         
-        if (!email) {
+        if (!email && !phoneNumber) {
             toast({
-                title: 'Email Required',
-                description: 'Please provide an email address',
+                title: 'Contact Required',
+                description: 'Please provide an email address or phone number',
                 status: 'warning',
                 duration: 5000,
                 isClosable: true,
@@ -120,18 +122,49 @@ function VerifyAccount() {
 
         setIsLoading(true);
         try {
-            await verifyEmail(email, otpCode);
+            // Call different endpoints based on flow
+            if (isPasswordReset) {
+                // Password reset verification - use verify-reset-code endpoint
+                const payload = email 
+                    ? { email, code: otpCode }
+                    : { phone_number: phoneNumber, code: otpCode };
+                
+                await verifyResetCode(payload);
+            } else {
+                // Signup email verification - use verify-email endpoint
+                if (email) {
+                    await verifyEmail(email, otpCode);
+                }
+            }
+            
+            // Success message depends on the flow
+            const successTitle = isPasswordReset ? 'Code Verified' : 'Email Verified';
+            const successDescription = isPasswordReset 
+                ? 'You can now create a new password' 
+                : 'Your email has been verified successfully';
             
             toast({
-                title: 'Email Verified',
-                description: 'Your email has been verified successfully',
+                title: successTitle,
+                description: successDescription,
                 status: 'success',
                 duration: 5000,
                 isClosable: true,
             });
             
-            // Navigate to login page after successful verification
-            navigate('/login');
+            // Route based on flow
+            if (isPasswordReset) {
+                // Password reset flow - go to create new password page
+                navigate('/reset-password', {
+                    state: { 
+                        email, 
+                        phoneNumber,
+                        code: otpCode 
+                    }
+                });
+            } else {
+                // Signup verification flow - go to login
+                navigate('/login');
+            }
         } catch (error) {
             const errorMessage = error.response?.data?.message || 
                                error.response?.data?.code?.[0] ||
@@ -156,9 +189,11 @@ function VerifyAccount() {
         >
             <div>
                 <form onSubmit={handleSubmit} className='w-full'>
-                    {email && (
+                    {(email || phoneNumber) && (
                         <div className='mb-6 text-center'>
-                            <p className='text-[#333333] text-sm'>Code sent to: <span className='font-semibold'>{email}</span></p>
+                            <p className='text-[#333333] text-sm'>
+                                Code sent to: <span className='font-semibold'>{email || phoneNumber}</span>
+                            </p>
                         </div>
                     )}
                     
