@@ -1,10 +1,11 @@
-import { Button, Image } from '@chakra-ui/react'
+import { Button, Image, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import grapeIcon from '../assets/images/grapeIcon.svg'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import { useSelector } from 'react-redux'
 import { logout } from '../services/auth'
+import ContactUsModal from './ContactUsModal'
 
 const navMenu = [
     {
@@ -17,7 +18,7 @@ const navMenu = [
     },
     {
         title: 'Our Cause',
-        link: '/cause'
+        link: '/#our-causes'
     },
     {
         title: 'Contact us',
@@ -29,11 +30,23 @@ function HomeNav() {
     const navigate = useNavigate();
     const { token } = useSelector((state) => state.auth);
     const isAuthenticated = !!token;
+    const { isOpen:modalIsOpen, onOpen, onClose } = useDisclosure()
+
 
     const handleLogout = () => {
         logout();
         navigate('/login');
     };
+
+    const handleScroll = (id) => {
+        navigate('/')
+        setTimeout(() => {
+          document.getElementById(id)?.scrollIntoView({
+            behavior: 'smooth',
+          })
+        }, 100)
+    }
+
     return (
         <nav>
             <div className='flex justify-between items-center md:pr-10 border-b border-[#EEF8FF] py-4 px-3'>
@@ -47,7 +60,19 @@ function HomeNav() {
                 <div className='md:flex gap-10 hidden'>
                     {
                         navMenu.map(({ title, link }, index) => (
-                            <Link to={link} key={index}>
+                            <Link to={link} key={index}
+                                onClick={(e) => {
+                                    if (link.includes('#')) {
+                                    e.preventDefault()
+                                    const id = link.split('#')[1]
+                                    handleScroll(id)
+                                    }else if(link.includes('contact')){
+                                        e.preventDefault()
+                                        console.log('open modal')
+                                        onOpen()
+                                    }
+                                }}
+                            >
                                 <h2 className='text-[#333333] text-lg'>
                                     {title}
                                 </h2>
@@ -55,7 +80,7 @@ function HomeNav() {
                         ))
                     }
                 </div>
-                {isAuthenticated ? (
+                {/* {isAuthenticated ? (
                     <div className='flex gap-3'>
                         <Button
                             variant='solid'
@@ -87,7 +112,7 @@ function HomeNav() {
                             onClick={() => navigate('/signup')}
                         >Sign up</Button>
                     </div>
-                )}
+                )} */}
             </div>
             {/* Mobile Menu */}
             {isOpen && (
@@ -146,6 +171,11 @@ function HomeNav() {
                 onClick={() => setIsOpen(false)}
                 />
             )}
+            <ContactUsModal
+                isOpen={modalIsOpen} 
+                onOpen={onOpen}
+                onClose={onClose}
+            />
         </nav>
     )
 }

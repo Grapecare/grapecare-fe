@@ -17,7 +17,9 @@ function CareCard({title, subTitle, btnTitle, icon}) {
                 color="#EA1D78"
                 bg='inherit'
                 _hover={{ bg: '#EA1D781A', border: 'none' }}
-                _active={{ bg: '#EA1D7833' }}
+                _focus={{ outline: 'none', boxShadow: 'none' }}
+                _focusVisible={{ outline: 'none', boxShadow: 'none' }}
+                _active={{ outline: 'none', boxShadow: 'none' }}
             >
                 {btnTitle}
             </Button>

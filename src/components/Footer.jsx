@@ -12,9 +12,10 @@ function Footer() {
         <div className='bg-[#EA1D78] p-6 md:p-20 text-white'>
             <div className="flex flex-col md:flex-row gap-10 md:gap-24 pb-10 md:pb-20">
                 <div className="w-full md:w-4/12">
-                    <Image src={whiteIcon} alt="logo" className='hidden md:block mb-6'/>
+                    <Image src={whiteIcon} alt="logo" className='hidden md:block mb-4'/>
                     <Image src={whiteIcon} alt="logo" className='md:hidden mb-3' boxSize='80px'/>
-                    <div className='w-full md:w-[80%]'>
+                    <div className='w-full md:w-[80%]' id='waitlist'>
+                        <p className="font-medium text-lg mb-2">Join our waitlist</p>
                         <InputGroup >
                             <InputLeftElement
                                 pointerEvents='none'
@@ -24,7 +25,7 @@ function Footer() {
                             >
                                 <EmailIcon color='#fff' />
                             </InputLeftElement>
-                            <Input type='text' placeholder='Email address'
+                            <Input type='text' placeholder='Enter email address'
                                 border="1px solid #FFFFFF66"
                                 borderRadius={'80px'}
                                 width='100%'
@@ -42,7 +43,9 @@ function Footer() {
                         fontWeight={700}
                         fontSize='18px'
                         _hover={{ bg: '#ffffff', border: 'none' }}
-                        _active={{ bg: '#EA1D7833' }}
+                        _focus={{ outline: 'none', boxShadow: 'none' }}
+                        _focusVisible={{ outline: 'none', boxShadow: 'none' }}
+                        _active={{ outline: 'none', boxShadow: 'none' }}
                     >
                         Submit
                     </Button>
