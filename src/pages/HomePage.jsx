@@ -53,7 +53,7 @@ function HomePage() {
           <div className='w-full md:w-1/2 flex items-center'>
             <div className='w-full md:w-4/5'>
               <div className='w-full flex justify-center md:justify-start'>
-                <h3 className='bg-[#DCF1FF] rounded-[20px] text-[#EA1D78] text-center text-base font-medium py-2 px-5 w-fit'>Our Misson</h3>
+                <h3 className='bg-[#DCF1FF] rounded-[20px] text-[#EA1D78] text-center text-base font-medium py-2 px-5 w-fit'>Our Mission</h3>
               </div>
               <h1 className='text-[#333333] font-bold text-base md:text-[60px] text-center md:text-start'>Connecting Communities to Care</h1>
               <div className='mb-6 hidden md:flex justify-center md:justify-end'>

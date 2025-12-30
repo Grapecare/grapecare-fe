@@ -12,10 +12,10 @@ const navMenu = [
         title: 'Home',
         link: '/'
     },
-    {
-        title: 'About us',
-        link: '/about'
-    },
+    // {
+    //     title: 'About us',
+    //     link: '/about'
+    // },
     {
         title: 'Our Cause',
         link: '/#our-causes'
