@@ -75,8 +75,8 @@ function GetStarted() {
     return (
         <div>
             <PageHeader title="Donate Blood" />
-            <div className="p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
-                <h2 className='font-medium text-[#004475] text-3xl mb-4'>Institution Information</h2>
+            <div className="p-3 md:p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
+                <h2 className='font-bold md:font-medium text-[#004475] text-xl md:text-3xl mb-4'>Institution Information</h2>
                 <form
                     onSubmit={formik.handleSubmit}
                     className='w-full'
@@ -188,7 +188,10 @@ function GetStarted() {
                             required={true}
                         />
                     </div>
-                    <Stack direction='row' justifyContent={'space-between'} mb={3}>
+                    <Stack 
+                        direction={{ base: 'column', md: 'row' }}
+                        justifyContent={'space-between'} mb={3}
+                    >
                         <Stack w='50%'>
                             <label className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'>
                             Blood Inventory:<span className='text-[#8C0F41]'>*</span>
@@ -263,7 +266,7 @@ function GetStarted() {
                         >
                             <div className="flex flex-col items-center">
                                 <UploadIcon />
-                                <label className="inline-block text-[#333333CC] text-base px-4 py-2 rounded cursor-pointer mt-2">
+                                <label className="inline-block text-[#333333CC] text-base px-4 py-2 rounded cursor-pointer mt-2 text-center">
                                     Browse and chose the files you want to upload from your computer
                                     <input
                                         type="file"
@@ -283,7 +286,7 @@ function GetStarted() {
                         >
                             <div className="flex flex-col items-center">
                                 <UploadIcon />
-                                <label className="inline-block text-[#333333CC] text-base px-4 py-2 rounded cursor-pointer mt-2">
+                                <label className="inline-block text-[#333333CC] text-base px-4 py-2 rounded cursor-pointer mt-2 text-center">
                                     Browse and chose the files you want to upload from your computer
                                     <input
                                         type="file"
@@ -303,7 +306,10 @@ function GetStarted() {
                             alignItems='center'
                             gap={2}
                         >
-                            <Text fontSize={['base']} fontWeight='medium' color='#333333'>I confirm all information is accurate & consent to medical screening.</Text>
+                            <Text 
+                                fontSize={{ base: '10px', md: 'base' }} 
+                                fontWeight='medium' color='#333333'
+                            >I confirm all information is accurate & consent to medical screening.</Text>
                         </Checkbox>
                     </div>
                     <Button
