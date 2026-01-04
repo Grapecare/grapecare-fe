@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard'
 import MainLayout from './layouts/MainLayout'
 import DashboardHome from './pages/DashboardHome'
 import ProtectedRoute from './components/ProtectedRoute'
+import PersonalInfo from './pages/auth/PersonalInfo'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Route path='/forgot-password' element={<ForgotPassword />} />
       <Route path='/reset-password' element={<PasswordReset />} />
       <Route path='/verify-account' element={<VerifyAccount />} />
+      <Route path='/personal-info' element={<PersonalInfo />} />
       <Route path='/dashboard/*' 
         element={
           <ProtectedRoute>
