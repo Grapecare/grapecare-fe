@@ -88,7 +88,7 @@ function Footer() {
                             </div>
                             <div className='border border-[#fff] w-14 h-14 rounded-full flex justify-center items-center'>
                                 <a 
-                                    href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
+                                    href="https://web.facebook.com/grapecare26/" target="_blank" rel="noopener noreferrer" 
                                     className='bg-white h-6 w-6 p-[2px] flex justify-center items-center rounded-[4px]'
                                 >
                                     <FaFacebook color="#EA1D78" size="24" />
