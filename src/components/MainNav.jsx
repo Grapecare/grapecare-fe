@@ -1,5 +1,5 @@
 import { Avatar, Image, Input, InputGroup, InputLeftElement, WrapItem } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import grapeIcon from '../assets/images/grapeIcon.svg'
 import { BellIcon, CloseIcon, EmailIcon, HamburgerIcon, Search2Icon } from '@chakra-ui/icons'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
@@ -37,6 +37,16 @@ function MainNav() {
     const { token } = useSelector((state) => state.auth);
     // const isAuthenticated = !!token;
     const isAuthenticated = true;
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 10);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleLogout = () => {
         logout();
@@ -44,17 +54,22 @@ function MainNav() {
     };
 
     return (
-        <nav>
-            <div className='bg-[#EEF8FF80] sticky top-0 z-30 flex items-center justify-between md:pr-10 p-4'>
+        <nav className='w-full fixed z-30'>
+            <div className={`sticky top-0 flex items-center justify-between md:pr-10 px-4 py-1
+                ${scrolled
+                    ? 'bg-[#EEF8FF] shadow-md backdrop-blur'
+                    : 'bg-[#EEF8FF80]'
+                }`}
+            >
                 <Image src={grapeIcon} alt="logo" className='hidden md:block' />
                 <div className='md:hidden'>
                     <HamburgerIcon boxSize={7}
                         onClick={() => setIsOpen(true)}
                     />
                 </div>
-                <div className="hidden md:block">
+                <div className="hidden md:block w-120">
                     <InputGroup
-                        w={'50%'}
+                        w={'100%'}
                         bg={'white'}
                     >
                         <InputLeftElement pointerEvents='none'>

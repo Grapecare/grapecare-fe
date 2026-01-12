@@ -47,7 +47,7 @@ function MainSideBar() {
   };
   
   return (
-    <div className='md:w-[15%] bg-[#EEF8FF80] fixed top-25 left-0 bottom-0 hidden md:block'>
+    <div className='md:w-[15%] bg-[#EEF8FF80] fixed top-20 left-0 bottom-0 hidden md:block'>
       <nav>
         <ul className='flex flex-col gap-3 mr-1 md:mt-8'>
           {
