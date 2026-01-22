@@ -11,7 +11,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { FiLogOut } from "react-icons/fi";
-import ConfirmLogoutIcon from "../assets/icons/COnfirmLogoutIcon";
+import ConfirmLogoutIcon from "../assets/icons/ConfirmLogoutIcon";
 
 export default function LogoutConfirmModal({
   isOpen,
