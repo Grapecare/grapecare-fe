@@ -10,6 +10,13 @@ import CampaignDetails from './CampaignDetails'
 import TeleConsulting from './TeleConsulting'
 import RegisterDoctor from './RegisterDoctor'
 import BookAppointment from './BookAppointment'
+import HealthPlans from './HealthPlans'
+import HMOPlans from './HMOPlans'
+import HmoPlanDetails from './HmoPlanDetails'
+import BuyPlan from './BuyPlan'
+import Profile from './Profile'
+import ProfileInfo from './ProfileInfo'
+import PaymentHistory from './PaymentHistory'
 import NotFound from './NotFound'
 import ComingSoon from './ComingSoon'
 
@@ -30,6 +37,13 @@ function DashboardHome() {
       <Route path='/save-a-soul/:id' element={isDev ? <CampaignDetails /> : <ComingSoon featureName="Save-a-Soul" />} />
       <Route path='/book-appointment' element={isDev ? <BookAppointment /> : <ComingSoon featureName="TeleConsulting" />} />
       <Route path='*' element={<NotFound hideHeader inDashboard />} />
+      <Route path='/health-plans' element={<HealthPlans />} />
+      <Route path='/hmo-plans' element={<HMOPlans />} />
+      <Route path='/hmo-plan-details' element={<HmoPlanDetails />} />
+      <Route path='/buy-plan' element={<BuyPlan />} />
+      <Route path='/profile' element={<Profile />} />
+      <Route path='/profile/profile-information' element={<ProfileInfo />} />
+      <Route path='/profile/payment-history' element={<PaymentHistory />} />
     </Routes>
   )
 }
