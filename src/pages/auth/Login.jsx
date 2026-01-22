@@ -1,13 +1,14 @@
 import React from 'react'
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+// import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import AuthLayout from '../../layouts/AuthLayout';
 import EmailLogin from '../../components/EmailLogin';
-import PhoneLogin from '../../components/PhoneLogin';
+// import PhoneLogin from '../../components/PhoneLogin';
 
-const tabLabels = [
-    "Login With Email",
-    "Login With Phone",
-];
+// MVP: Phone login disabled to save SMS costs - uncomment to re-enable
+// const tabLabels = [
+//     "Login With Email",
+//     "Login With Phone",
+// ];
 
 function Login() {
     return (
@@ -15,6 +16,10 @@ function Login() {
             title='Welcome Back!'
             subTitle='Enter your details to log into your account'
         >
+            {/* MVP: Email-only login - uncomment Tabs below to re-enable phone login */}
+            <EmailLogin />
+            
+            {/* Phone login tabs - uncomment to re-enable
             <Tabs variant='soft-rounded'  isLazy>
                 <TabList bg="#EEF8FF" borderRadius={"10px"} display={"flex"} justifyContent={"space-between"} mb={4}>
                     {tabLabels.map((label) => (
@@ -41,6 +46,7 @@ function Login() {
                     </TabPanel>
                 </TabPanels>
             </Tabs>
+            */}
         </AuthLayout>
     )
 }
