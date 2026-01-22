@@ -23,7 +23,7 @@ function PageHeader({ title, showCauseBtn = false }) {
                     </BreadcrumbItem>
 
                     <BreadcrumbItem>
-                        <BreadcrumbLink href='#' fontSize='20px' color='#333333'>Blood bank</BreadcrumbLink>
+                        <BreadcrumbLink href='#' fontSize='20px' color='#333333'>{title}</BreadcrumbLink>
                     </BreadcrumbItem>
 
                     {/* <BreadcrumbItem isCurrentPage>

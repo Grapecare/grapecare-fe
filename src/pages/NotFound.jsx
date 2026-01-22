@@ -3,19 +3,22 @@ import { Button, Image } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import grapeIcon from '../assets/images/grapeIcon.svg'
 
-function NotFound() {
+function NotFound({ hideHeader = false, inDashboard = false }) {
   const navigate = useNavigate()
+  const homePath = inDashboard ? '/dashboard/home' : '/'
 
   return (
-    <div className='min-h-screen flex flex-col'>
-      <div className='py-4 px-4 md:px-10 border-b border-[#DCF1FF]'>
-        <Image 
-          src={grapeIcon} 
-          alt="GRAPECARE logo" 
-          className='cursor-pointer'
-          onClick={() => navigate('/')}
-        />
-      </div>
+    <div className={`${hideHeader ? 'min-h-[60vh]' : 'min-h-screen'} flex flex-col`}>
+      {!hideHeader && (
+        <div className='py-4 px-4 md:px-10 border-b border-[#DCF1FF]'>
+          <Image 
+            src={grapeIcon} 
+            alt="GRAPECARE logo" 
+            className='cursor-pointer'
+            onClick={() => navigate('/')}
+          />
+        </div>
+      )}
       
       <div className='flex-1 flex flex-col items-center justify-center px-4 py-10'>
         <div className='text-center max-w-lg'>
@@ -56,9 +59,9 @@ function NotFound() {
               _focus={{ outline: 'none', boxShadow: 'none' }}
               _focusVisible={{ outline: 'none', boxShadow: 'none' }}
               _active={{ outline: 'none', boxShadow: 'none' }}
-              onClick={() => navigate('/')}
+              onClick={() => navigate(homePath)}
             >
-              Go to Homepage
+              {inDashboard ? 'Go to Dashboard' : 'Go to Homepage'}
             </Button>
             <Button
               bg='transparent'

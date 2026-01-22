@@ -50,7 +50,12 @@ function HomeNav() {
     return (
         <nav>
             <div className='flex justify-between items-center md:pr-10 border-b border-[#EEF8FF] py-4 px-3'>
-                <Image src={grapeIcon} alt="logo" className='hidden md:block' />
+                <Image 
+                    src={grapeIcon} 
+                    alt="logo" 
+                    className='hidden md:block cursor-pointer' 
+                    onClick={() => navigate(isAuthenticated ? '/dashboard/home' : '/login')}
+                />
                 {/* <Image src={grapeIcon} alt="logo" boxSize='100px' className='md:hidden'/> */}
                 <div className='md:hidden'>
                     <HamburgerIcon boxSize={7}

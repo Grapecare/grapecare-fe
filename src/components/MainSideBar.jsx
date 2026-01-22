@@ -16,14 +16,14 @@ const navMenu = [
     path: '/dashboard/home'
   },
   {
-    name: 'Blood Bank',
+    name: 'Blood Donation',
     icon: BloodBankIcon,
     path: '/dashboard/blood-bank'
   },
   {
     name: 'Save-a-Soul',
     icon: SaveSoulIcon,
-    path: '/dashboard/save-a-Soul'
+    path: '/dashboard/save-a-soul'
   },
   {
     name: 'Health Plans',
