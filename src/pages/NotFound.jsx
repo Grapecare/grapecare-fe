@@ -86,7 +86,7 @@ function NotFound({ hideHeader = false, inDashboard = false }) {
             <path d="M12 8V12" stroke="#004475" strokeWidth="2" strokeLinecap="round"/>
             <path d="M12 16H12.01" stroke="#004475" strokeWidth="2" strokeLinecap="round"/>
           </svg>
-          <span className='text-sm'>Need help? Contact us at support@grapecare.com</span>
+          <span className='text-sm'>Need help? Contact us at hello@grape.care</span>
         </div>
       </div>
     </div>

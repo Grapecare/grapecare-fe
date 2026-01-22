@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import grapeIcon from '../assets/images/grapeIcon.svg'
 import { BellIcon, CloseIcon, EmailIcon, HamburgerIcon, Search2Icon } from '@chakra-ui/icons'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { navMenu } from '../constant/common'
+import { logout } from '../services/auth'
 import ProfileIcon from '../assets/icons/ProfileIcon';
 import LogoutIcon from '../assets/icons/LogoutIcon';
 
@@ -34,7 +35,7 @@ import LogoutIcon from '../assets/icons/LogoutIcon';
 function MainNav() {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate()
-    const { token } = useSelector((state) => state.auth);
+    // const { token } = useSelector((state) => state.auth);
     // const isAuthenticated = !!token;
     const isAuthenticated = true;
     const [scrolled, setScrolled] = useState(false);
@@ -61,13 +62,13 @@ function MainNav() {
                     : 'bg-[#EEF8FF80]'
                 }`}
             >
-                <Image src={grapeIcon} alt="logo" className='hidden md:block' />
+                <Image src={grapeIcon} alt="logo" className='hidden md:block cursor-pointer' onClick={() => navigate('/')} />
                 <div className='md:hidden'>
                     <HamburgerIcon boxSize={7}
                         onClick={() => setIsOpen(true)}
                     />
                 </div>
-                <div className="hidden md:block w-120">
+                {/* <div className="hidden md:block w-120">
                     <InputGroup
                         w={'100%'}
                         bg={'white'}
@@ -77,10 +78,10 @@ function MainNav() {
                         </InputLeftElement>
                         <Input type='text' placeholder='search here' />
                     </InputGroup>
-                </div>
+                </div> */}
                 <div className='flex items-center gap-4'>
-                    <EmailIcon boxSize={6} color='#3F3F46' />
-                    <BellIcon boxSize={6} />
+                    {/* <EmailIcon boxSize={6} color='#3F3F46' />
+                    <BellIcon boxSize={6} /> */}
                     <WrapItem gap={2} alignItems={'center'}>
                         <Avatar name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
                         <div className=''>
@@ -162,7 +163,7 @@ function MainNav() {
                     </ul>
                     <h3 className="text-xs text-[#333333CC] pl-4 mt-2 flex items-center gap-2">
                         <span className="text-[#333333CC] font-medium text-lg">©</span> 
-                        2025 GrapeCare. All rights reserved.</h3>
+                        {new Date().getFullYear()} GrapeCare. All rights reserved.</h3>
                 </div>
             )}
 
