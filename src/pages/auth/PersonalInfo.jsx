@@ -169,7 +169,7 @@ function PersonalInfo() {
                                 State
                             </label>
                             <select
-                                name='bloodType'
+                                name='state'
                                 value={formik.values.state}
                                 onChange={(e) => {
                                     const value = e.target.value;
@@ -188,14 +188,14 @@ function PersonalInfo() {
                         </div>
                         <div className='mb-4 w-[45%]'>
                             <label
-                                htmlFor={formik.values.bloodType}
+                                htmlFor={formik.values.city}
                                 className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'
                             >
                                 City/Town
                             </label>
                             <select
-                                name='bloodType'
-                                value={formik.values.bloodType}
+                                name='city'
+                                value={formik.values.city}
                                 onChange={(e) => formik.setFieldValue('city', e.target.value)}
                                 className='appearance-none bg-[#EEF8FF4D] text-[#333333CC] border-[#CBD5E1] border rounded-[10px] w-full h-[53px] py-2 px-[25px] placeholder:text-sm placeholder:text-[#333333CC] text-base'
                             >

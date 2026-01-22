@@ -10,6 +10,13 @@ import CampaignDetails from './CampaignDetails'
 import TeleConsulting from './TeleConsulting'
 import RegisterDoctor from './RegisterDoctor'
 import BookAppointment from './BookAppointment'
+import HealthPlans from './HealthPlans'
+import HMOPlans from './HMOPlans'
+import HmoPlanDetails from './HmoPlanDetails'
+import BuyPlan from './BuyPlan'
+import Profile from './Profile'
+import ProfileInfo from './ProfileInfo'
+import PaymentHistory from './PaymentHistory'
 
 function DashboardHome() {
   return (
@@ -24,6 +31,13 @@ function DashboardHome() {
       <Route path='/tele-consultation' element={<TeleConsulting />} />
       <Route path='/save-a-soul/:id' element={<CampaignDetails />} />
       <Route path='/book-appointment' element={<BookAppointment />} />
+      <Route path='/health-plans' element={<HealthPlans />} />
+      <Route path='/hmo-plans' element={<HMOPlans />} />
+      <Route path='/hmo-plan-details' element={<HmoPlanDetails />} />
+      <Route path='/buy-plan' element={<BuyPlan />} />
+      <Route path='/profile' element={<Profile />} />
+      <Route path='/profile/profile-information' element={<ProfileInfo />} />
+      <Route path='/profile/payment-history' element={<PaymentHistory />} />
     </Routes>
   )
 }
