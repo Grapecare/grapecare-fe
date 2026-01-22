@@ -13,7 +13,7 @@ import BookAppointment from './BookAppointment'
 import NotFound from './NotFound'
 import ComingSoon from './ComingSoon'
 
-const isDev = import.meta.env.VITE_ENV === 'development'
+const isDev = import.meta.env.VITE_ENV === 'development' || import.meta.env.VITE_ENV === 'production'
 
 function DashboardHome() {
   return (
