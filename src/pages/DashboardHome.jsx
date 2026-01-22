@@ -10,6 +10,7 @@ import CampaignDetails from './CampaignDetails'
 import TeleConsulting from './TeleConsulting'
 import RegisterDoctor from './RegisterDoctor'
 import BookAppointment from './BookAppointment'
+import NotFound from './NotFound'
 
 function DashboardHome() {
   return (
@@ -24,6 +25,7 @@ function DashboardHome() {
       <Route path='/tele-consultation' element={<TeleConsulting />} />
       <Route path='/save-a-soul/:id' element={<CampaignDetails />} />
       <Route path='/book-appointment' element={<BookAppointment />} />
+      <Route path='*' element={<NotFound />} />
     </Routes>
   )
 }

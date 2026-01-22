@@ -14,6 +14,7 @@ import MainLayout from './layouts/MainLayout'
 import DashboardHome from './pages/DashboardHome'
 import ProtectedRoute from './components/ProtectedRoute'
 import PersonalInfo from './pages/auth/PersonalInfo'
+import NotFound from './pages/NotFound'
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           </ProtectedRoute>
         } 
       />
+      <Route path='*' element={<NotFound />} />
     </Routes>
   )
 }

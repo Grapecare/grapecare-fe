@@ -80,7 +80,7 @@ function HomeNav() {
                         ))
                     }
                 </div>
-                {/* {isAuthenticated ? (
+                {isAuthenticated ? (
                     <div className='flex gap-3'>
                         <Button
                             variant='solid'
@@ -112,7 +112,7 @@ function HomeNav() {
                             onClick={() => navigate('/signup')}
                         >Sign up</Button>
                     </div>
-                )} */}
+                )}
             </div>
             {/* Mobile Menu */}
             {isOpen && (
