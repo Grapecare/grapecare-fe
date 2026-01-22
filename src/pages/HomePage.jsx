@@ -3,7 +3,7 @@ import HomeNav from '../components/HomeNav'
 import doctors from '../assets/images/doctors.svg'
 import { Button, Image, useDisclosure } from '@chakra-ui/react'
 import Mask from '../assets/images/Mask.png'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import CareCard from '../components/CareCard'
 import Footer from '../components/Footer'
 import bloodbank from '../assets/images/BloodBank.svg'
@@ -41,7 +41,7 @@ const cardData = [
 ]
 
 function HomePage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure()
 
 

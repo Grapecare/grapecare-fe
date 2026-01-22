@@ -1,7 +1,7 @@
 import { Button, Image, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import grapeIcon from '../assets/images/grapeIcon.svg'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import { useSelector } from 'react-redux'
 import { logout } from '../services/auth'
@@ -28,8 +28,10 @@ const navMenu = [
 function HomeNav() {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
     const { token } = useSelector((state) => state.auth);
     const isAuthenticated = !!token;
+    const isOnDashboard = location.pathname.startsWith('/dashboard');
     const { isOpen:modalIsOpen, onOpen, onClose } = useDisclosure()
 
 
@@ -50,7 +52,12 @@ function HomeNav() {
     return (
         <nav>
             <div className='flex justify-between items-center md:pr-10 border-b border-[#EEF8FF] py-4 px-3'>
-                <Image src={grapeIcon} alt="logo" className='hidden md:block' />
+                <Image 
+                    src={grapeIcon} 
+                    alt="logo" 
+                    className='hidden md:block cursor-pointer' 
+                    onClick={() => navigate(isOnDashboard ? '/' : '/dashboard/home')}
+                />
                 {/* <Image src={grapeIcon} alt="logo" boxSize='100px' className='md:hidden'/> */}
                 <div className='md:hidden'>
                     <HamburgerIcon boxSize={7}
@@ -80,7 +87,7 @@ function HomeNav() {
                         ))
                     }
                 </div>
-                {/* {isAuthenticated ? (
+                {isAuthenticated ? (
                     <div className='flex gap-3'>
                         <Button
                             variant='solid'
@@ -112,7 +119,7 @@ function HomeNav() {
                             onClick={() => navigate('/signup')}
                         >Sign up</Button>
                     </div>
-                )} */}
+                )}
             </div>
             {/* Mobile Menu */}
             {isOpen && (

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import useAuthSync from './hooks/useAuthSync'
 import HomePage from './pages/HomePage'
 import Login from './pages/auth/Login'
 import Welcome from './pages/auth/onboarding/Welcome'
@@ -14,9 +15,12 @@ import MainLayout from './layouts/MainLayout'
 import DashboardHome from './pages/DashboardHome'
 import ProtectedRoute from './components/ProtectedRoute'
 import PersonalInfo from './pages/auth/PersonalInfo'
+import NotFound from './pages/NotFound'
 
 
 function App() {
+  useAuthSync();
+
   return (
     <Routes>
       <Route path='/' element={<HomePage />} />
@@ -38,6 +42,7 @@ function App() {
           </ProtectedRoute>
         } 
       />
+      <Route path='*' element={<NotFound />} />
     </Routes>
   )
 }
