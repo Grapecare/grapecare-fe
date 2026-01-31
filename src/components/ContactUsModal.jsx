@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Modal,
     ModalOverlay,
@@ -11,25 +11,60 @@ import {
     Button,
     Text,
     Textarea,
+    useToast,
 } from '@chakra-ui/react'
 import { useFormik } from 'formik';
 import InputField from './InputField';
 import * as Yup from 'yup'
+import api from '../services/api'
 
 function ContactUsModal({ isOpen, onOpen, onClose }) {
     const finalRef = React.useRef(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const toast = useToast()
+
     const formik = useFormik({
         initialValues: {
-            name: '',
+            fullName: '',
             email: '',
             message: '',
         },
         validationSchema: Yup.object({
-            fullName: Yup.string().required("Field is required"),
+            fullName: Yup.string().required("Full name is required"),
             email: Yup.string().email('Enter a valid email').required("Email is required"),
+            message: Yup.string().required("Message is required"),
         }),
         onSubmit: async (values) => {
-            console.log('vals', values)
+            setIsLoading(true)
+            try {
+                await api.post('/contact/', {
+                    email: values.email,
+                    full_name: values.fullName,
+                    message: values.message,
+                })
+                toast({
+                    title: 'Message sent!',
+                    description: 'Thank you for reaching out. We\'ll get back to you soon.',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                })
+                formik.resetForm()
+                onClose()
+            } catch (error) {
+                const errorMessage = error.response?.data?.message || 
+                                    error.response?.data?.errors?.email?.[0] ||
+                                    'Something went wrong. Please try again.'
+                toast({
+                    title: 'Failed to send message',
+                    description: errorMessage,
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                })
+            } finally {
+                setIsLoading(false)
+            }
         },
     });
     return (
@@ -84,7 +119,7 @@ function ContactUsModal({ isOpen, onOpen, onClose }) {
                         />
                     </div>
                     <Button
-                        // isLoading
+                        isLoading={isLoading}
                         type='submit'
                         bg='#EA1D78'
                         color='white'
@@ -92,7 +127,8 @@ function ContactUsModal({ isOpen, onOpen, onClose }) {
                         borderRadius="md"
                         mt={5}
                         mb={2}
-                        disabled={!formik.values.email}
+                        _hover={{ bg: '#C01864' }}
+                        isDisabled={!formik.values.email || !formik.values.fullName || !formik.values.message}
                     >
                         Submit
                     </Button>
