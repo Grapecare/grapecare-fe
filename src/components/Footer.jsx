@@ -1,16 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
 import whiteIcon from '../assets/images/whiteIcon.svg'
-import { Button, Image, Input, InputGroup, InputLeftElement, useDisclosure } from '@chakra-ui/react'
+import { Button, Image, Input, InputGroup, InputLeftElement, useDisclosure, useToast } from '@chakra-ui/react'
 import { EmailIcon } from '@chakra-ui/icons'
 import { FaFacebook, FaInstagram, FaLinkedin, FaX } from 'react-icons/fa6'
 import Twitter from '../assets/images/Twitter.svg'
 import Facebook from '../assets/images/Facebook.svg'
 import { Link } from 'react-router-dom'
 import ContactUsModal from './ContactUsModal'
+import api from '../services/api'
 
 
 function Footer() {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [email, setEmail] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const toast = useToast()
+
+    const handleSubscribe = async () => {
+        if (!email || !email.includes('@')) {
+            toast({
+                title: 'Invalid email',
+                description: 'Please enter a valid email address',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
+            return
+        }
+
+        setIsLoading(true)
+        try {
+            await api.post('/subscribe/', { email })
+            toast({
+                title: 'Subscribed!',
+                description: 'Thank you for joining us in making healthcare accessible for everyone. We\'ll keep you updated!',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            })
+            setEmail('')
+        } catch (error) {
+            const errorMessage = error.response?.data?.errors?.email?.[0] || 
+                                error.response?.data?.message || 
+                                'Something went wrong. Please try again.'
+            toast({
+                title: 'Subscription failed',
+                description: errorMessage,
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     return (
         <div className='bg-[#EA1D78] p-6 md:p-20 text-white'>
@@ -29,7 +72,11 @@ function Footer() {
                             >
                                 <EmailIcon color='#fff' />
                             </InputLeftElement>
-                            <Input type='text' placeholder='Enter email address'
+                            <Input 
+                                type='email' 
+                                placeholder='Enter email address'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 border="1px solid #FFFFFF66"
                                 borderRadius={'80px'}
                                 width='100%'
@@ -46,6 +93,8 @@ function Footer() {
                         borderRadius={'80px'}
                         fontWeight={700}
                         fontSize='18px'
+                        isLoading={isLoading}
+                        onClick={handleSubscribe}
                         _hover={{ bg: '#ffffff', border: 'none' }}
                         _focus={{ outline: 'none', boxShadow: 'none' }}
                         _focusVisible={{ outline: 'none', boxShadow: 'none' }}
