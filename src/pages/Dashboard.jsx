@@ -1,33 +1,35 @@
 import { Button, Image } from '@chakra-ui/react'
 import React from 'react'
 import Doc from '../assets/images/doc.png'
-import lady from '../assets/images/lady.png'
+// import lady from '../assets/images/lady.png'
 import BloodIcon from '../assets/icons/BloodIcon'
 import ArrTopRight from '../assets/icons/ArrTopRight'
 import appointment from '../assets/images/appointment.png'
 import { GiBlood } from 'react-icons/gi'
 import CampaignCard from '../components/CampaignCard'
 import HeroCards from '../components/HeroCards'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
+// const isDev = import.meta.env.VITE_ENV === 'development'
 
 function Dashboard() {
   const navigate = useNavigate()
   //get current user data from redux persist
-  const {user} = useSelector((state) => state.auth)
+  // const {user} = useSelector((state) => state.auth)
 
   return (
     <div>
       <div className="flex justify-between mb-8">
         <h2 className='font-bold text-xl md:text-3xl text-[#333333]'>Dashboard</h2>
-        <Button color='#fff' bg='#EA1D78' className='text-base'>Find Donor</Button>
+        <Button color='#fff' bg='#EA1D78' _hover={{ bg: '#C01864' }} _focus={{ boxShadow: 'none' }} _focusVisible={{ boxShadow: 'none' }} className='text-base' onClick={() => navigate('/dashboard/blood-bank')}>Find Donor</Button>
       </div>
       <HeroCards />
       <div className="flex flex-col md:flex-row justify-between gap-5 mb-8">
         <div className="w-full md:w-8/12 border border-[#33333380] rounded-[20px] px-6 py-9">
           <div className="w-2/5">
             <h2 className="mb-4 text-xl font-medium text-[#333333]">Discover Affordable, High-quality Treatment Options for You and Your Family.</h2>
-            <Button color='#fff' bg='#EA1D78'>Explore Health Plans</Button>
+            <Button color='#fff' bg='#EA1D78' _hover={{ bg: '#C01864' }} _focus={{ boxShadow: 'none' }} _focusVisible={{ boxShadow: 'none' }} onClick={() => navigate('/dashboard/tele-consultation')}>Explore Health Plans</Button>
           </div>
         </div>
         <div className="w-full md:w-4/12 border border-[#33333380] rounded-[20px] px-6 py-9 flex flex-col items-center">
@@ -42,23 +44,54 @@ function Dashboard() {
       </div>
       <div className="flex justify-between mb-5">
         <h2 className='font-medium text-3xl text-[#004475]'>Our Charity Campaign </h2>
+        {/* Create Cause button - show only when campaigns exist
         <Button color='#F93B99' bg='#fff' variant='outline' borderColor='#F93B99'
+          _hover={{ bg: '#FDF2F8' }}
+          _focus={{ boxShadow: 'none' }}
+          _focusVisible={{ boxShadow: 'none' }}
           onClick={()=>navigate('/dashboard/create-cause')}
         >Create Cause</Button>
+        */}
       </div>
       <div className="">
-        <h3 className='text-[#333333] font-medium text-xl'>Latest Campaigns</h3>
+        {/* <h3 className='text-[#333333] font-medium text-xl'>Latest Campaigns</h3> */}
+        {/* Empty State */}
+        <div className="flex flex-col items-center justify-center py-12 px-4 border border-dashed border-[#33333340] rounded-[20px] mb-5">
+          <div className="w-20 h-20 mb-4 bg-[#EA1D781A] rounded-full flex items-center justify-center">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#EA1D78"/>
+            </svg>
+          </div>
+          <h4 className="text-[#333333] text-lg font-semibold mb-2">No Campaigns Yet</h4>
+          <p className="text-[#333333CC] text-sm text-center max-w-md mb-4">
+            Be the first to create a cause and make a difference. Start a campaign to help those in need.
+          </p>
+          <Button 
+            color='#fff' 
+            bg='#EA1D78' 
+            _hover={{ bg: '#C01864' }} 
+            _focus={{ boxShadow: 'none' }} 
+            _focusVisible={{ boxShadow: 'none' }}
+            onClick={() => navigate('/dashboard/create-cause')}
+          >
+            Create Your First Cause
+          </Button>
+        </div>
+        {/* Original Campaign Cards - uncomment when campaigns are available
         <div className="grid grid-cols-3 gap-5 mb-5">
           <CampaignCard />
         </div>
-        <div className="flex justify-center mb-10">
-          <Button color='#F93B99' bg='#fff' variant='outline' borderColor='#F93B99'>See All</Button>
-        </div>
-        <div className="flex flex-col md:flex-row justify-between gap-5 mb-8">
+        {isDev && (
+          <div className="flex justify-center mb-10">
+            <Button color='#F93B99' bg='#fff' variant='outline' borderColor='#F93B99' _hover={{ bg: '#FDF2F8' }} _focus={{ boxShadow: 'none' }} _focusVisible={{ boxShadow: 'none' }}>See All</Button>
+          </div>
+        )}
+        */}
+        <div className="flex flex-col md:flex-row justify-between gap-5 mb-8 mt-10">
           <div className="w-[60%] border border-[#33333380] rounded-[20px] px-6 py-9 flex">
             <div className="w-5/12">
-              <h2 className="mb-4 text-xl font-medium text-[#333333]">Feeling unwell? Get Diagnosed and Treated Today - Schedule a Call With a Doctor.</h2>
-              <Button rightIcon={<ArrTopRight color='#fff' />} color='#fff' bg='#EA1D78'>Book Appointment</Button>
+              <h2 className="mb-4 text-xl font-medium text-[#333333]">Feeling unwell? Get Diagnosed and Treated Today - Schedule a Call With a Doctor.</h2>
+              <Button rightIcon={<ArrTopRight color='#fff' />} color='#fff' bg='#EA1D78' _hover={{ bg: '#C01864' }} _focus={{ boxShadow: 'none' }} _focusVisible={{ boxShadow: 'none' }} onClick={() => navigate('/dashboard/tele-consultation')}>Book Appointment</Button>
             </div>
             <div className='max-w-5/12'>
               <Image src={appointment} alt="appointment" maxW={{ base: '100%' }}/>
@@ -67,7 +100,7 @@ function Dashboard() {
           <div className="w-[40%] border border-[#33333380] rounded-[20px] px-6 py-9 flex flex-col items-center">
             <h2 className='text-[#333333CC] text-2xl mb-3 font-semibold'>Ready to Consult Online?</h2>
             <h2 className='text-[#333333] text-base font-medium mb-6'>Join our TeleConsulting platform today</h2>
-            <Button rightIcon={<ArrTopRight color='#fff' />} color='#fff' bg='#F93B99'>Signup As Doctor</Button>
+            <Button rightIcon={<ArrTopRight color='#fff' />} color='#fff' bg='#F93B99' _hover={{ bg: '#C01864' }} _focus={{ boxShadow: 'none' }} _focusVisible={{ boxShadow: 'none' }} onClick={() => navigate('/dashboard/tele-consultation')}>Signup As Doctor</Button>
           </div>
         </div>
       </div>

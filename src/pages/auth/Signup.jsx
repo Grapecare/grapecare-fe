@@ -106,8 +106,8 @@ function Signup() {
     });
     return (
         <AuthLayout
-            title='Welcome Back!'
-            subTitle='Enter your details to log into your account'
+            title='Sign up on GrapeCare'
+            subTitle='Fill the form below to get you on board.'
             bgImage='/images/signup-bg.svg'
         >
             <div className='pb-10'>

@@ -10,7 +10,8 @@ function EmailLogin() {
     const navigate = useNavigate();
     const location = useLocation();
     const toast = useToast();
-    const [checkedItem, setCheckedItem] = useState(false);
+    // MVP: "Keep me logged in" disabled - uncomment to re-enable
+    // const [checkedItem, setCheckedItem] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const formik = useFormik({
@@ -123,6 +124,7 @@ function EmailLogin() {
                         error={!!(formik.touched.password && formik.errors.password)}
                     />
                 </div>
+                {/* MVP: "Keep me logged in" disabled - uncomment to re-enable
                 <Checkbox
                     isChecked={checkedItem}
                     // isIndeterminate={isIndeterminate}
@@ -132,6 +134,7 @@ function EmailLogin() {
                 >
                     Keep me logged in
                 </Checkbox>
+                */}
                 <Link to='/forgot-password' className='text-[#004475] text-base font-semibold'>Forgot Password?</Link>
                 <Button
                     isLoading={isLoading}

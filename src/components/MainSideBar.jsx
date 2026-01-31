@@ -8,6 +8,8 @@ import TeleConsultIcon from '../assets/icons/TeleConsultIcon'
 import ProfileIcon from '../assets/icons/ProfileIcon'
 import LogoutIcon from '../assets/icons/LogoutIcon'
 import { logout } from '../services/auth'
+import LogoutConfirmModal from './LogoutConfirmModal'
+import { useDisclosure } from '@chakra-ui/react'
 
 const navMenu = [
   {
@@ -16,14 +18,14 @@ const navMenu = [
     path: '/dashboard/home'
   },
   {
-    name: 'Blood Bank',
+    name: 'Blood Donation',
     icon: BloodBankIcon,
     path: '/dashboard/blood-bank'
   },
   {
     name: 'Save-a-Soul',
     icon: SaveSoulIcon,
-    path: '/dashboard/save-a-Soul'
+    path: '/dashboard/save-a-soul'
   },
   {
     name: 'Health Plans',
@@ -40,21 +42,23 @@ const navMenu = [
 function MainSideBar() {
   const location = useLocation();
   const navigate = useNavigate();
-  
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const handleLogout = () => {
     logout();
+    onClose();
     navigate('/login');
   };
-  
+
   return (
-    <div className='md:w-[15%] bg-[#EEF8FF80] fixed top-25 left-0 bottom-0 hidden md:block'>
+    <div className='md:w-[15%] bg-[#EEF8FF80] fixed top-20 left-0 bottom-0 hidden md:block'>
       <nav>
         <ul className='flex flex-col gap-3 mr-1 md:mt-8'>
           {
             navMenu.map((nav, index) => {
               const Icon = nav.icon;
               const isActive = location.pathname === nav.path || location.pathname.startsWith(nav.path + '/');
-              
+
               return (
                 <li key={index}>
                   <NavLink
@@ -71,7 +75,7 @@ function MainSideBar() {
           }
           <li className='border-t-2 border-[#33333333]'>
             <NavLink
-              to='/profile'
+              to='/dashboard/profile'
               className={({ isActive }) =>
                 `flex items-center gap-5 px-5 py-4 text-base rounded-r-lg rounded-tl-xl
                 ${isActive ? 'bg-[#EA1D78] text-white shadow-[0_4px_10px_#00000040]' : 'text-[#333333] hover:bg-gray-100'}`
@@ -86,17 +90,21 @@ function MainSideBar() {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to='/login'
-              onClick={handleLogout}
-              className='flex items-center gap-5 px-5 py-4 text-base rounded-r-lg rounded-tl-xl w-full text-left text-[#333333] hover:bg-gray-100 transition-colors'
+            <div
+              onClick={onOpen}
+              className='flex items-center cursor-pointer gap-5 px-5 py-4 text-base rounded-r-lg rounded-tl-xl w-full text-left text-[#333333] hover:bg-gray-100 transition-colors'
             >
-              <LogoutIcon/>
+              <LogoutIcon />
               <span>Logout</span>
-            </NavLink>
+            </div>
           </li>
         </ul>
       </nav>
+      <LogoutConfirmModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onConfirmLogout={handleLogout}
+      />
     </div>
   )
 }

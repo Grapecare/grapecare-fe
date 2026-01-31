@@ -1,10 +1,11 @@
 import { Avatar, Image, Input, InputGroup, InputLeftElement, WrapItem } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import grapeIcon from '../assets/images/grapeIcon.svg'
 import { BellIcon, CloseIcon, EmailIcon, HamburgerIcon, Search2Icon } from '@chakra-ui/icons'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { navMenu } from '../constant/common'
+import { logout } from '../services/auth'
 import ProfileIcon from '../assets/icons/ProfileIcon';
 import LogoutIcon from '../assets/icons/LogoutIcon';
 
@@ -34,9 +35,19 @@ import LogoutIcon from '../assets/icons/LogoutIcon';
 function MainNav() {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate()
-    const { token } = useSelector((state) => state.auth);
+    // const { token } = useSelector((state) => state.auth);
     // const isAuthenticated = !!token;
     const isAuthenticated = true;
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 10);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleLogout = () => {
         logout();
@@ -44,17 +55,22 @@ function MainNav() {
     };
 
     return (
-        <nav>
-            <div className='bg-[#EEF8FF80] sticky top-0 z-30 flex items-center justify-between md:pr-10 p-4'>
-                <Image src={grapeIcon} alt="logo" className='hidden md:block' />
+        <nav className='w-full fixed z-30'>
+            <div className={`sticky top-0 flex items-center justify-between md:pr-10 px-4 py-1
+                ${scrolled
+                    ? 'bg-[#EEF8FF] shadow-md backdrop-blur'
+                    : 'bg-[#EEF8FF80]'
+                }`}
+            >
+                <Image src={grapeIcon} alt="logo" className='hidden md:block cursor-pointer' onClick={() => navigate('/')} />
                 <div className='md:hidden'>
                     <HamburgerIcon boxSize={7}
                         onClick={() => setIsOpen(true)}
                     />
                 </div>
-                <div className="hidden md:block">
+                {/* <div className="hidden md:block w-120">
                     <InputGroup
-                        w={'50%'}
+                        w={'100%'}
                         bg={'white'}
                     >
                         <InputLeftElement pointerEvents='none'>
@@ -62,10 +78,10 @@ function MainNav() {
                         </InputLeftElement>
                         <Input type='text' placeholder='search here' />
                     </InputGroup>
-                </div>
+                </div> */}
                 <div className='flex items-center gap-4'>
-                    <EmailIcon boxSize={6} color='#3F3F46' />
-                    <BellIcon boxSize={6} />
+                    {/* <EmailIcon boxSize={6} color='#3F3F46' />
+                    <BellIcon boxSize={6} /> */}
                     <WrapItem gap={2} alignItems={'center'}>
                         <Avatar name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
                         <div className=''>
@@ -147,7 +163,7 @@ function MainNav() {
                     </ul>
                     <h3 className="text-xs text-[#333333CC] pl-4 mt-2 flex items-center gap-2">
                         <span className="text-[#333333CC] font-medium text-lg">©</span> 
-                        2025 GrapeCare. All rights reserved.</h3>
+                        {new Date().getFullYear()} GrapeCare. All rights reserved.</h3>
                 </div>
             )}
 

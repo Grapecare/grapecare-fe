@@ -115,3 +115,30 @@ button:focus-visible {
 .nav-button.next {
   right: 20px;
 }
+
+.rdp-custom {
+  --rdp-accent-color: #ec4899;
+  --rdp-background-color: #fce7f3;
+}
+
+.rdp-day {
+  font-size: 0.75rem;
+}
+
+.rdp-caption_label {
+  font-weight: 600;
+  color: #ec4899;
+}
+
+.rdp-nav_button {
+  color: #ec4899;
+}
+
+.rdp-nav_button {
+  color: #ec4899; /* pink */
+}
+
+.rdp-nav_button svg {
+  fill: #ec4899;
+  stroke: #ec4899;
+}
