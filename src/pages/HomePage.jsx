@@ -11,6 +11,7 @@ import savesoul from '../assets/images/savesoul.svg'
 import healthplan from '../assets/images/healthplan.svg'
 import teleconsult from '../assets/images/teleconsult.svg'
 import ContactUsModal from '../components/ContactUsModal'
+import WaitlistModal from '../components/WaitlistModal'
 
 
 const cardData = [
@@ -42,7 +43,8 @@ const cardData = [
 
 function HomePage() {
   // const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isContactOpen, onOpen: onContactOpen, onClose: onContactClose } = useDisclosure()
+  const { isOpen: isWaitlistOpen, onOpen: onWaitlistOpen, onClose: onWaitlistClose } = useDisclosure()
 
 
   return (
@@ -68,7 +70,8 @@ function HomePage() {
               </div>
               <p className='text-[#141219] text-base md:text-[22px] text-center md:text-start'>Donate blood, access health plans, give compassionately, and consult trusted doctors—all in one place.</p>
               <div className='flex justify-center md:justify-start  gap-7 mt-5 md:mt-10'>
-                <Button bg='#EA1D78' color='white'
+                {/* MVP: Comment out Get Started, use Join Waitlist instead */}
+                {/* <Button bg='#EA1D78' color='white'
                   _hover={{
                     border: 'none',
                   }}
@@ -81,16 +84,21 @@ function HomePage() {
                       el.scrollIntoView({ behavior: 'smooth' })
                     }
                   }}
-                >Get Started</Button>
-                <Button bg='#fff' color='#EA1D78' variant='outline'
-                  border='1px solid #EA1D78'
-                  _hover={{
-                    border: 'none',
-                  }}
+                >Get Started</Button> */}
+                <Button bg='#EA1D78' color='white'
+                  _hover={{ bg: '#C01864' }}
                   _focus={{ outline: 'none', boxShadow: 'none' }}
                   _focusVisible={{ outline: 'none', boxShadow: 'none' }}
                   _active={{ outline: 'none', boxShadow: 'none' }}
-                  onClick={() => onOpen()}
+                  onClick={onWaitlistOpen}
+                >Join Waitlist</Button>
+                <Button bg='#fff' color='#EA1D78' variant='outline'
+                  border='1px solid #EA1D78'
+                  _hover={{ bg: '#EA1D780D' }}
+                  _focus={{ outline: 'none', boxShadow: 'none' }}
+                  _focusVisible={{ outline: 'none', boxShadow: 'none' }}
+                  _active={{ outline: 'none', boxShadow: 'none' }}
+                  onClick={onContactOpen}
                 >Contact Us</Button>
               </div>
             </div>
@@ -173,9 +181,13 @@ function HomePage() {
           </div>
         </div>
         <ContactUsModal
-          isOpen={isOpen}
-          onOpen={onOpen}
-          onClose={onClose}
+          isOpen={isContactOpen}
+          onOpen={onContactOpen}
+          onClose={onContactClose}
+        />
+        <WaitlistModal
+          isOpen={isWaitlistOpen}
+          onClose={onWaitlistClose}
         />
       </div>
       <Footer />
