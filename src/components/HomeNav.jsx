@@ -32,6 +32,7 @@ function HomeNav() {
     const { token } = useSelector((state) => state.auth);
     const isAuthenticated = !!token;
     const isOnDashboard = location.pathname.startsWith('/dashboard');
+    const isDev = import.meta.env.VITE_ENV === 'development';
     const { isOpen:modalIsOpen, onOpen, onClose } = useDisclosure()
 
 
@@ -87,38 +88,41 @@ function HomeNav() {
                         ))
                     }
                 </div>
-                {isAuthenticated ? (
-                    <div className='flex gap-3'>
-                        <Button
-                            variant='solid'
-                            bg='#EA1D78'
-                            color='white'
-                            _hover={{ border: 'none', bg: '#EA1D781A' }}
-                            onClick={handleLogout}
-                        >
-                            Logout
-                        </Button>
-                    </div>
-                ) : (
-                    <div className='flex gap-3'>
-                        <Button variant='ghost' bg='transparent' color='#333333' fontSize={'16px'}
-                            fontWeight={500}
-                            border='1px solid #333333'
-                            _hover={{
-                                border: 'none',
-                                bg: 'transparent',
-                            }}
-                            onClick={() => navigate('/login')}
-                        >
-                            Login
-                        </Button>
-                        <Button bg='#EA1D78' color='white'
-                            _hover={{
-                                border: 'none',
-                            }}
-                            onClick={() => navigate('/signup')}
-                        >Sign up</Button>
-                    </div>
+                {/* MVP: Hide login/signup buttons in production */}
+                {isDev && (
+                    isAuthenticated ? (
+                        <div className='flex gap-3'>
+                            <Button
+                                variant='solid'
+                                bg='#EA1D78'
+                                color='white'
+                                _hover={{ border: 'none', bg: '#EA1D781A' }}
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </Button>
+                        </div>
+                    ) : (
+                        <div className='flex gap-3'>
+                            <Button variant='ghost' bg='transparent' color='#333333' fontSize={'16px'}
+                                fontWeight={500}
+                                border='1px solid #333333'
+                                _hover={{
+                                    border: 'none',
+                                    bg: 'transparent',
+                                }}
+                                onClick={() => navigate('/login')}
+                            >
+                                Login
+                            </Button>
+                            <Button bg='#EA1D78' color='white'
+                                _hover={{
+                                    border: 'none',
+                                }}
+                                onClick={() => navigate('/signup')}
+                            >Sign up</Button>
+                        </div>
+                    )
                 )}
             </div>
             {/* Mobile Menu */}
@@ -151,23 +155,26 @@ function HomeNav() {
                                 </li>
                             ))
                         }
-                        {isAuthenticated ? (
-                            <li className='text-white text-base py-3.5'
-                                onClick={() => {
-                                    setIsOpen(false);
-                                    handleLogout();
-                                }}
-                            >
-                                Logout
-                            </li>
-                        ) : (
-                            <li className='text-white text-base py-3.5'
-                                onClick={() => setIsOpen(false)}
-                            >
-                                <Link to='/login'>
-                                    Portal Login
-                                </Link>
-                            </li>
+                        {/* MVP: Hide login/logout in mobile menu in production */}
+                        {isDev && (
+                            isAuthenticated ? (
+                                <li className='text-white text-base py-3.5'
+                                    onClick={() => {
+                                        setIsOpen(false);
+                                        handleLogout();
+                                    }}
+                                >
+                                    Logout
+                                </li>
+                            ) : (
+                                <li className='text-white text-base py-3.5'
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <Link to='/login'>
+                                        Portal Login
+                                    </Link>
+                                </li>
+                            )
                         )}
                     </ul>
                 </div>

@@ -16,6 +16,7 @@ import DashboardHome from './pages/DashboardHome'
 import ProtectedRoute from './components/ProtectedRoute'
 import PersonalInfo from './pages/auth/PersonalInfo'
 import NotFound from './pages/NotFound'
+import Unsubscribe from './pages/Unsubscribe'
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <Route path='/reset-password' element={<PasswordReset />} />
       <Route path='/verify-account' element={<VerifyAccount />} />
       <Route path='/personal-info' element={<PersonalInfo />} />
+      <Route path='/unsubscribe' element={<Unsubscribe />} />
       <Route path='/dashboard/*' 
         element={
           <ProtectedRoute>
