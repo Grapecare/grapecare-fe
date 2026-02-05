@@ -15,10 +15,10 @@ const navMenu = [
   {
     name: 'Dashboard',
     icon: DashBoardIcon,
-    path: '/dashboard/home'
+    path: '/dashboard'
   },
   {
-    name: 'Blood Donation',
+    name: 'Blood Bank',
     icon: BloodBankIcon,
     path: '/dashboard/blood-bank'
   },

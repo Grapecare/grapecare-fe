@@ -35,7 +35,7 @@ function TeleConsulting() {
                     </h3>
                     <Button
                         w='100%'
-                        onClick={()=>navigate('/dashboard/register-doctor')}
+                        onClick={()=>navigate('/dashboard/tele-consultation/register-doctor')}
                         rightIcon={<ArrTopRight color='#fff' />} color='#fff' bg='#F93B99'
                     >Register Now</Button>
                 </div>

@@ -4,6 +4,7 @@ import { Avatar, Box, Button, IconButton, Spinner, useDisclosure } from '@chakra
 import LogoutConfirmModal from '../components/LogoutConfirmModal';
 import { logout } from '../services/auth';
 import { FiEdit2 } from 'react-icons/fi';
+import AppBreadCrumb from '../components/AppBreadCrumb';
 
 function ProfileInfo() {
     const { isOpen, onOpen, onClose } = useDisclosure();

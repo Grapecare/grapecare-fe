@@ -29,7 +29,7 @@ function HmoPlanCard({name, benefits, price}) {
                     }
                 </div>
                 <h2 className="underline font-medium text-[#333333] text-xl text-center mb-5 cursor-pointer"
-                    onClick={()=>navigate('/dashboard/hmo-plan-details')}
+                    onClick={()=>navigate('/dashboard/health-plans/hmo-plans/hmo-plan-details')}
                 >View All Benefits</h2>
                 <Button color='#fff' bg='#EA1D78' fontWeight={'700'} width='100%'>Buy Now</Button>
             </div>

@@ -90,7 +90,7 @@ function HmoPlanDetails() {
             </div>
           </div>
           <Button color='#fff' bg='#EA1D78' fontWeight={'700'} width='100%'
-            onClick={()=>navigate('/dashboard/buy-plan')}
+            onClick={()=>navigate('/dashboard/health-plans/hmo-plans/buy-plan')}
           >Buy Now</Button>
         </div>
       </div>

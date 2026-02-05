@@ -72,7 +72,7 @@ function Dashboard() {
             _hover={{ bg: '#C01864' }} 
             _focus={{ boxShadow: 'none' }} 
             _focusVisible={{ boxShadow: 'none' }}
-            onClick={() => navigate('/dashboard/create-cause')}
+            onClick={() => navigate('/dashboard/save-a-soul/create-cause')}
           >
             Create Your First Cause
           </Button>

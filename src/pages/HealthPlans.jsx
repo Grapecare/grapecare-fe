@@ -4,6 +4,7 @@ import { Button, Image } from '@chakra-ui/react'
 import ArrTopRight from '../assets/icons/ArrTopRight'
 import hmo from '../assets/images/hmo.png'
 import HmoCard from '../components/HmoCard'
+import HMOHistoryTable from '../components/HMOHistoryTable'
 
 
 function HealthPlans() {
@@ -36,7 +37,7 @@ function HealthPlans() {
                     </span>
                 </div>
             </div>
-            <div className="">
+            <div className="mb-6">
                 <h2 className='font-medium text-[#004475] text-4xl mb-5'>Available HMO Providers</h2>
                 <div className="grid grid-cols-3 gap-6">
                     {
@@ -48,6 +49,9 @@ function HealthPlans() {
                         ))
                     }
                 </div>
+            </div>
+            <div>
+                <HMOHistoryTable/>
             </div>
         </div>
     )

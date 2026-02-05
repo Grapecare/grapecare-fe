@@ -12,7 +12,7 @@ function HmoCard({name}) {
             </div>
             <h2 className="">{name}</h2>
             <div className="flex items-center gap-4 cursor-pointer"
-                onClick={() => navigate('/dashboard/hmo-plans')}
+                onClick={() => navigate('/dashboard/health-plans/hmo-plans')}
             >
                 <h3 className="text-[#F93B99] text-base">View plans</h3>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

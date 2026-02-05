@@ -42,7 +42,7 @@ function PhoneLogin() {
                 });
                 
                 // Redirect to the page they were trying to access, or dashboard
-                const from = location.state?.from?.pathname || '/dashboard/home';
+                const from = location.state?.from?.pathname || '/dashboard';
                 navigate(from, { replace: true });
             } catch (error) {
                 const errorCode = error.response?.data?.error_code;

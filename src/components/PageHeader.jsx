@@ -8,6 +8,7 @@ import {
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { MdDashboard } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import AppBreadCrumb from './AppBreadCrumb'
 
 function PageHeader({ title, showCauseBtn = false }) {
     return (
@@ -16,18 +17,9 @@ function PageHeader({ title, showCauseBtn = false }) {
                 <div className="">
                     <h2 className='font-bold md:text-3xl text-2xl text-[#333333]'>{title}</h2>
                 </div>
-                <Breadcrumb spacing='8px' mb={8} separator={<ChevronRightIcon color='gray.500' />}>
-                    <MdDashboard />
-                    <BreadcrumbItem ml='10px'>
-                        <BreadcrumbLink as={Link} to='/dashboard/home' fontSize='20px' color='#333333'>Dashboard</BreadcrumbLink>
-                    </BreadcrumbItem>
-
-                    <BreadcrumbItem isCurrentPage>
-                        <BreadcrumbLink fontSize='20px' color='#333333'>{title}</BreadcrumbLink>
-                    </BreadcrumbItem>
-                </Breadcrumb>
+                <AppBreadCrumb title={title} />
             </div>
-            {showCauseBtn && <Button as={Link} to='/dashboard/create-cause' color='#fff' bg='#EA1D78'>Create Cause</Button>}
+            {showCauseBtn && <Button as={Link} to='/dashboard/save-a-soul/create-cause' color='#fff' bg='#EA1D78'>Create Cause</Button>}
         </div>
     )
 }
