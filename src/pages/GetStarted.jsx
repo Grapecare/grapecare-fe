@@ -266,7 +266,7 @@ function GetStarted() {
                         >
                             <div className="flex flex-col items-center">
                                 <UploadIcon />
-                                <label className="inline-block text-[#333333CC] text-base px-4 py-2 rounded cursor-pointer mt-2 text-center">
+                                <label className="inline-block text-[#333333CC] text-xs md:text-sm px-4 py-2 rounded cursor-pointer mt-2 text-center">
                                     Browse and chose the files you want to upload from your computer
                                     <input
                                         type="file"
@@ -286,7 +286,7 @@ function GetStarted() {
                         >
                             <div className="flex flex-col items-center">
                                 <UploadIcon />
-                                <label className="inline-block text-[#333333CC] text-base px-4 py-2 rounded cursor-pointer mt-2 text-center">
+                                <label className="inline-block text-[#333333CC] text-xs md:text-sm px-4 py-2 rounded cursor-pointer mt-2 text-center">
                                     Browse and chose the files you want to upload from your computer
                                     <input
                                         type="file"

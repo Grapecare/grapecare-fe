@@ -181,8 +181,8 @@ function DonateBlood() {
     return (
         <div>
             <PageHeader title="Be a Voluntary Donor" />
-            <div className="p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
-                <h2 className='font-medium text-[#004475] text-3xl mb-4'>Blood Details</h2>
+            <div className="p-3 md:p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
+                <h2 className='font-medium text-[#004475] text-xl md:text-3xl mb-4'>Blood Details</h2>
                 <form
                     onSubmit={formik.handleSubmit}
                     className='w-full'
@@ -208,7 +208,7 @@ function DonateBlood() {
                             ))}
                         </select>
                     </div>
-                    <Stack spacing={[1, 5]} direction={['column', 'row']}>
+                    <Stack spacing={[1, 5]} direction={['row', 'row']}>
                         <label className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'>
                             Have you donated before? <span className='text-[#8C0F41]'>*</span>
                         </label>
@@ -248,7 +248,7 @@ function DonateBlood() {
                             required={true}
                         />
                     </div>
-                    <h2 className='font-medium text-[#004475] text-3xl mb-4'>Health Screening</h2>
+                    <h2 className='font-medium text-[#004475] text-xl md:text-3xl mb-4'>Health Screening</h2>
                     <div className=''>
                         <InputField
                             name="weight"
@@ -318,8 +318,8 @@ function DonateBlood() {
                             })}
                         </Stack>
                     </Stack>
-                    <Stack direction='row' justifyContent={'space-between'}>
-                        <Stack w='50%'>
+                    <Stack direction={['column','row']} justifyContent={'space-between'}>
+                        <Stack w={['100%','50%']}>
                             <label className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'>
                                 Major surgery in last 6 months?<span className='text-[#8C0F41]'>*</span>
                             </label>
@@ -342,7 +342,7 @@ function DonateBlood() {
                                 </Checkbox>
                             </Stack>
                         </Stack>
-                        <Stack w='50%'>
+                        <Stack w={['100%','50%']}>
                             <label className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'>
                                 Pregnancy or delivery in last 6 months?<span className='text-[#8C0F41]'>*</span>
                             </label>
@@ -366,8 +366,8 @@ function DonateBlood() {
                             </Stack>
                         </Stack>
                     </Stack>
-                    <Stack direction='row' justifyContent={'space-between'}>
-                        <Stack w='50%'>
+                    <Stack direction={['column','row']} justifyContent={'space-between'}>
+                        <Stack w={['100%','50%']}>
                             <label className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'>
                                 Consumed alcohol in last 24 hours?<span className='text-[#8C0F41]'>*</span>
                             </label>
@@ -390,7 +390,7 @@ function DonateBlood() {
                                 </Checkbox>
                             </Stack>
                         </Stack>
-                        <Stack w='50%'>
+                        <Stack w={['100%','50%']}>
                             <label className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'>
                                 Smoked in last 12 hours?<span className='text-[#8C0F41]'>*</span>
                             </label>
@@ -414,8 +414,8 @@ function DonateBlood() {
                             </Stack>
                         </Stack>
                     </Stack>
-                    <Stack direction='row' justifyContent={'space-between'} mb={3}>
-                        <Stack w='50%'>
+                    <Stack direction={['column','row']} justifyContent={'space-between'} mb={3}>
+                        <Stack w={['100%','50%']}>
                             <label className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'>
                                 Preferred Donation Type:<span className='text-[#8C0F41]'>*</span>
                             </label>
@@ -440,12 +440,13 @@ function DonateBlood() {
                                     onChange={() => formik.setFieldValue('donationType', 'any')}
                                     alignItems='center'
                                     gap={2}
+                                    mb={[4,0]}
                                 >
                                     <Text fontSize={['base']} color='#333333'>Any</Text>
                                 </Checkbox>
                             </Stack>
                         </Stack>
-                        <Stack w='50%'>
+                        <Stack w={['100%','50%']}>
                             <label className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'>
                                 Available Days:<span className='text-[#8C0F41]'>*</span>
                             </label>
@@ -484,7 +485,7 @@ function DonateBlood() {
                         >
                             <div className="flex flex-col items-center">
                                 <UploadIcon/>
-                                <label className="inline-block text-[#333333CC] text-base px-4 py-2 rounded cursor-pointer mt-2">
+                                <label className="inline-block text-[#333333CC] text-xs md:text-base text-center px-4 py-2 rounded cursor-pointer mt-2">
                                 Browse and chose the files you want to upload from your computer
                                     <input
                                         type="file"
@@ -503,11 +504,11 @@ function DonateBlood() {
                                     Uploaded File:
                                 </Text>
                                 {files.map((file, index) => (
-                                    <div key={index} className="flex items-center justify-between bg-[#EEF8FF] p-3 rounded-lg mb-2">
+                                    <div key={index} className="flex items-center justify-between bg-[#EEF8FF] p-2 md:p-3 rounded-lg mb-2">
                                         <div className="flex items-center gap-2">
                                             <BiUpload className="text-[#EA1D78]" size={20} />
                                             <div>
-                                                <Text fontSize="sm" color="#333333" fontWeight="medium">
+                                                <Text fontSize={["xs","sm"]} color="#333333" fontWeight="medium">
                                                     {file.name}
                                                 </Text>
                                                 <Text fontSize="xs" color="#33333399">
@@ -518,7 +519,7 @@ function DonateBlood() {
                                         <button
                                             type="button"
                                             onClick={() => setFiles(files.filter((_, i) => i !== index))}
-                                            className="text-red-500 hover:text-red-700 text-sm font-medium"
+                                            className="text-red-500 hover:text-red-700 text-xs md:text-sm font-medium"
                                         >
                                             Remove
                                         </button>
@@ -535,7 +536,7 @@ function DonateBlood() {
                             alignItems='center'
                             gap={2}
                         >
-                            <Text fontSize={['base']} fontWeight='medium' color='#333333'>I confirm all information is accurate & consent to medical screening.</Text>
+                            <Text fontSize={['10px','base']} fontWeight='medium' color='#333333'>I confirm all information is accurate & consent to medical screening.</Text>
                         </Checkbox>
                     </div>
                     <Button

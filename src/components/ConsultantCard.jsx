@@ -1,9 +1,12 @@
-import { Image } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Image, Text } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import CheckIcon from '../assets/icons/CheckIcon'
 import { Link } from 'react-router-dom'
+import Rating from './Rating'
 
 function ConsultantCard() {
+  const [rating, setRating] = useState(0);
+
   return (
     <div className='bg-[#F4F4F580] rounded-xl p-5 border-[2px] border-[#DCF1FF]'>
       <div className="h-[206px] w-full mb-4 relative rounded-2xl">
@@ -22,8 +25,12 @@ function ConsultantCard() {
       </div>
       <div className="flex flex-col gap-1">
         <h3 className="font-medium text-xl">Cardiologist</h3>
-        <p className="text-xl text-[#333333E5]">4 Year Experience</p>
+        <p className="text-xl text-[#333333E5] font-normal">4 Year Experience</p>
         <p className="text-[#0066B4] font-semibold text-xl">₦5,000</p>
+        <Box display='flex' gap={4}>
+          <Rating value={rating} onChange={setRating} />
+          <Text mt={2} fontSize='16px' fontWeight={400} color='#333333E5'>{rating}</Text>
+        </Box>
         <Link to='/dashboard/tele-consultation/book-appointment' className='text-[#F93B99] text-base font-semibold underline'>Book Appointment</Link>
       </div>
     </div>
