@@ -11,7 +11,7 @@ function HmoPlanCard({name, benefits, price}) {
                 <h3 className="font-bold text-white text-xl mb-1">{name}</h3>
                 <h2 className="font-medium text-white text-2xl">{price} / <span className="font-normal text-lg">Yearly</span></h2>
             </div>
-            <div className="w-full p-4">
+            <div className="w-full p-4 border border-[#6DD1FF66] rounded-b-2xl">
                 <div className='flex flex-col gap-2 w-full mb-6'>
                     {
                         benefits.map((benefit, index) => (

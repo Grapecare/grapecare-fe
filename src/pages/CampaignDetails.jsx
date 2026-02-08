@@ -10,12 +10,12 @@ function CampaignDetails() {
     return (
         <div>
             <PageHeader title="Help Chioma With Kidney Transpalant" />
-            <div className="p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
-                <div className="flex gap-14">
-                    <div className="w-8/12">
-                        <h2 className='font-medium text-[#004475] text-3xl mb-4'>Help Chioma With Kidney Transpalant</h2>
+            <div className="p-3 md:p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
+                <div className="flex flex-col md:flex-row gap-10 md:gap-14">
+                    <div className="w-full md:w-8/12">
+                        <h2 className='font-medium text-[#004475] text-xl md:text-3xl mb-4'>Help Chioma With Kidney Transpalant</h2>
                         <div className="mb-5">
-                            <h2 className="text-2xl text-[#333333] mb-3 font-medium">About Chioma Eze</h2>
+                            <h2 className="text-xl md:text-2xl text-[#333333] mb-3 font-medium">About Chioma Eze</h2>
                             <p className="text-[#333333] text-base">
                                 Chioma Eze, a 28-year-old primary school teacher and devoted single mother from Lagos, is fighting for her life against end-stage
                                 renal failure. After two years of exhausting dialysis treatments that drain her finances and strength, a kidney transplant is
@@ -48,8 +48,8 @@ function CampaignDetails() {
                                 </ul>
                             </p>
                         </div>
-                        <div className="flex gap-4 mb-8">
-                            <div className="w-1/2 h-[160px] relative rounded-base">
+                        <div className="flex flex-col md:flex-row gap-4 mb-8 md:border-b border-dashed border-[#333333B2] md:pb-6">
+                            <div className="w-full md:w-1/2 h-[160px] relative rounded-base">
                                 <Image
                                     objectFit='cover'
                                     w="100%"
@@ -59,7 +59,7 @@ function CampaignDetails() {
                                     borderRadius='16px'
                                 />
                             </div>
-                            <div className="w-1/2 h-[160px] relative rounded-base">
+                            <div className="w-full md:w-1/2 h-[160px] relative rounded-base">
                                 <Image
                                     objectFit='cover'
                                     w="100%"
@@ -70,7 +70,7 @@ function CampaignDetails() {
                                 />
                             </div>
                         </div>
-                        <div className="flex gap-5">
+                        <div className="hidden md:flex gap-5">
                             <Link to='/'>
                                 <MdFacebook size={24} color='#EA1D78' />
                             </Link>
@@ -82,7 +82,7 @@ function CampaignDetails() {
                             </Link>
                         </div>
                     </div>
-                    <div className="w-4/12">
+                    <div className="w-full md:w-4/12">
                         <div className="mb-20">
                             <h2 className="text-2xl font-medium text-[#004475] mb-2">Donation Goal</h2>
                             <div class="flex items-center gap-[20px] mb-7">
@@ -112,11 +112,23 @@ function CampaignDetails() {
                                 <div class="h-[2px] bg-[#EA1D78] w-[10%]"></div>
                                 <div class="h-[2px] bg-[#EA1D78] w-[20%]"></div>
                             </div>
-                            <Donator/>
+                            <Donator />
                         </div>
                     </div>
                 </div>
             </div>
+            <div className="md:hidden flex items-center gap-5 border-t border-dashed border-[#333333B2] pt-4">
+                    <span className="font-medium text-2xl text-[#004475]">Share</span>
+                    <Link to='/'>
+                        <MdFacebook size={24} color='#EA1D78' />
+                    </Link>
+                    <Link to='/'>
+                        <BiLogoTwitter size={24} color='#EA1D78' />
+                    </Link>
+                    <Link to='/'>
+                        <BiLogoLinkedin size={24} color='#EA1D78' />
+                    </Link>
+                </div>
         </div>
     )
 }

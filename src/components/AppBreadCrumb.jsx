@@ -53,7 +53,7 @@ function AppBreadCrumb({title}) {
                                 display="flex"
                                 alignItems="center"
                                 gap="6px"
-                                fontSize={{ base: "18px", md: "22px" }}  
+                                fontSize={{ base: "16px", md: "22px" }}  
                                 fontWeight={{ base: "400", md: "400" }}
                             >
                                 {to === "/dashboard" && <MdDashboard />}
@@ -63,7 +63,7 @@ function AppBreadCrumb({title}) {
                             <BreadcrumbLink
                                 color="#333333"
                                 fontWeight="semibold"
-                                fontSize={{ base: "18px", md: "22px" }}
+                                fontSize={{ base: "16px", md: "22px" }}
                                 cursor="default"
                             >
                                 {routeNameMap[to] ? routeNameMap[to] : title}

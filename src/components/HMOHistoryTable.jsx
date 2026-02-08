@@ -64,16 +64,16 @@ const HMOHistoryTable = ({ data = hmoData ?? [] }) => {
 
             {/* Header Section */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-                <h2 className="text-3xl font-bold text-[#333333]">HMO History</h2>
+                <h2 className="text-xl md:text-3xl font-bold text-[#333333]">HMO History</h2>
 
-                <div className="flex gap-4 items-center w-full md:w-auto">
+                <div className="flex flex-col md:flex-row gap-4 items-start md:items-center w-full md:w-auto">
 
                     {/* Search */}
                     <div className="relative w-full md:w-96">
                         <Input
                             placeholder="Search hmo plan, product Id, status...."
                             pl="40px"
-                            bg="white"
+                            bg="#F4F4F580"
                             borderRadius="12px"
                             height="48px"
                             _focus={{ boxShadow: "none" }}

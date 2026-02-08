@@ -19,15 +19,15 @@ function HmoPlanDetails() {
   return (
     <div>
       <PageHeader title="Health Plans" />
-      <div className="flex">
-        <div className="w-1/2 bg-gradient-to-br from-[#0066B4] to-[#002C4E] py-12 px-6 text-white rounded-tl-2xl h-fit">
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full md:w-1/2 bg-gradient-to-br from-[#0066B4] to-[#002C4E] py-12 px-5 md:px-6 text-white rounded-t-2xl md:rounded-tl-2xl md:rounded-tr-none h-fit">
           <h2 className="font-bold text-lg mb-4">AXA BRONZE HEALTH PLAN</h2>
           <p className="">At ₦86,500 per year, this entry level health insurance plan gives you access to roam
             across 1,295 hospitals in Nigeria for your medical needs. You can consult a doctor, get laboratory test,
             get children vaccines and undergo surgery up to a maximum of ₦250,000
           </p>
         </div>
-        <div className="w-1/2 bg-[#D1D1D180] py-[30px] px-[60px] flex flex-col gap-10 rounded-tr-2xl rounded-br-2xl">
+        <div className="w-full md:w-1/2 bg-[#D1D1D180] py-[30px] px-7 md:px-[60px] flex flex-col gap-10 md:rounded-tr-2xl rounded-b-2xl md:rounded-bl-none">
           <div className="bg-[#FFFFFF80] border border-[#6DD1FF66] text-[#333333] py-2.5 px-4 rounded-[8px]">
             <h2 className="font-medium text-2xl mb-2.5">REGION OF COVER</h2>
             <p className="text-base">Hospital Category Accessible</p>

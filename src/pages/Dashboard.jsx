@@ -117,7 +117,9 @@ function Dashboard() {
           <div className="w-full md:w-[40%] border border-[#33333380] rounded-[20px] px-6 py-9 flex flex-col items-center">
             <h2 className='text-[#333333CC] text-2xl mb-3 font-semibold'>Ready to Consult Online?</h2>
             <h2 className='text-[#333333] text-base font-medium mb-6'>Join our TeleConsulting platform today</h2>
-            <Button rightIcon={<ArrTopRight color='#fff' />} color='#fff' bg='#F93B99' _hover={{ bg: '#C01864' }} _focus={{ boxShadow: 'none' }} _focusVisible={{ boxShadow: 'none' }} onClick={() => navigate('/dashboard/tele-consultation')}>Signup As Doctor</Button>
+            <Button rightIcon={<ArrTopRight color='#fff' />} color='#fff' bg='#F93B99' _hover={{ bg: '#C01864' }} _focus={{ boxShadow: 'none' }} _focusVisible={{ boxShadow: 'none' }} 
+              onClick={() => navigate('/dashboard/tele-consultation/register-doctor')}
+            >Signup As Doctor</Button>
           </div>
         </div>
       </div>

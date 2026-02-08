@@ -10,7 +10,7 @@ function HmoCard({name}) {
             <div className="">
                 <Image src={hmohealth} alt='hmo' />
             </div>
-            <h2 className="">{name}</h2>
+            <h2 className="text-xl font-normal">{name}</h2>
             <div className="flex items-center gap-4 cursor-pointer"
                 onClick={() => navigate('/dashboard/health-plans/hmo-plans')}
             >

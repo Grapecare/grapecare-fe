@@ -95,13 +95,13 @@ function BuyPlanBeneficiary() {
             </TabList>
 
             <TabPanels mt={4}>
-                <TabPanel>
+                <TabPanel p={0}>
                     <MyselfForm/>
                 </TabPanel>
-                <TabPanel>
+                <TabPanel p={0}>
                     <p>Someone else content</p>
                 </TabPanel>
-                <TabPanel>
+                <TabPanel p={0}>
                     <p>Family / Group content</p>
                 </TabPanel>
             </TabPanels>

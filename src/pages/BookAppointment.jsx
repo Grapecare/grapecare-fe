@@ -23,30 +23,30 @@ function BookAppointment() {
     return (
         <div>
             <PageHeader title="Book Appointment" />
-            <div className="p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
-                <div className="py-10 px-20 rounded-xl bg-gradient-to-b from-[#F93B99] via-[#001B2E] to-[#001B2E] mb-10 flex gap-6">
+            <div className="p-3 md:p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
+                <div className="py-6 md:py-10 px-3 md:px-20 rounded-xl bg-gradient-to-b from-[#F93B99] via-[#001B2E] to-[#001B2E] mb-6 md:mb-10 flex items-center gap-3 md:gap-6">
                     <div className="w-3/12">
-                        <Avatar src='https://bit.ly/sage-adebayo' boxSize="200px" />
+                        <Avatar src='https://bit.ly/sage-adebayo' boxSize={["75px","200px"]} />
                     </div>
                     <div className="9/12">
                         <div className="flex items-center gap-3 mb-1">
-                            <h2 className="text-3xl font-bold text-white">Dr. Issac A</h2>
+                            <h2 className="text-2xl md:text-3xl font-bold text-white">Dr. Issac A</h2>
                             <CheckIcon />
                         </div>
-                        <p className="text-2xl font-medium text-[#FFFFFFCC]">Gynecologist</p>
-                        <h2 className="font-bold text-2xl text-white mb-3">₦10,000</h2>
-                        <div className="flex gap-20">
+                        <p className="text-xl md:text-2xl font-medium text-[#FFFFFFCC]">Gynecologist</p>
+                        <h2 className="font-bold text-xl md:text-2xl text-white mb-3">₦10,000</h2>
+                        <div className="flex gap-4 md:gap-20">
                             <div className="">
-                                <h3 className="text-xl text-[#FFFFFFE5] mb-1">4 years</h3>
-                                <p className="text-[#FFFFFFE5] text-sm">Experience</p>
+                                <h3 className="text-base md:text-xl text-[#FFFFFFE5] mb-1">4 years</h3>
+                                <p className="text-[#FFFFFFE5] text-[10px] md:text-sm">Experience</p>
                             </div>
                             <div className="">
-                                <h3 className="text-xl text-[#FFFFFFE5] mb-1">Adeoyo Hospital</h3>
-                                <p className="text-[#FFFFFFE5] text-sm">Location</p>
+                                <h3 className="text-base md:text-xl text-[#FFFFFFE5] mb-1">Adeoyo Hospital</h3>
+                                <p className="text-[#FFFFFFE5] text-[10px] md:text-sm">Location</p>
                             </div>
                             <div className="">
-                                <h3 className="text-xl text-[#FFFFFFE5] mb-1">5.0</h3>
-                                <p className="text-[#FFFFFFE5] text-sm">Rating</p>
+                                <h3 className="text-base md:text-xl text-[#FFFFFFE5] mb-1">5.0</h3>
+                                <p className="text-[#FFFFFFE5] text-[10px] md:text-sm">Rating</p>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@ function BookAppointment() {
                         >
                             <DateTimePicker />
                             <div className='mb-3'>
-                                <label className='font-medium text-base md:text-lg text-[#333333] mb-2 inline-block'>Note</label>
+                                <label className='font-medium text-lg text-[#333333] mb-2 inline-block'>Note</label>
                                 <Textarea placeholder='Here is a sample placeholder' />
                             </div>
                             <Button

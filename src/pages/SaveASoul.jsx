@@ -63,10 +63,10 @@ function SaveASoul() {
   return (
     <div>
       <PageHeader title="Save-a-Soul" showCauseBtn={true}/>
-      <h2 className='font-medium text-[#004475] text-3xl mb-4'>Our Charity Campaign </h2>
+      <h2 className='font-medium text-[#004475] text-xl md:text-3xl mb-4'>Our Charity Campaign </h2>
       <div className="mb-10">
-        <h2 className="font-medium text-xl text-[#333333] mb-2">Ongoing Campaigns</h2>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-5">
+        <h2 className="font-medium text-base md:text-xl text-[#333333] mb-2">Ongoing Campaigns</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
           {
             charityData.map((item, index) => (
               <CampaignCard 
@@ -83,9 +83,9 @@ function SaveASoul() {
         </div>
       </div>
       <div className="">
-        <h2 className='font-medium text-[#004475] text-3xl mb-4'>Completed Campaign</h2>
-        <h3 className="font-medium text-xl text-[#333333] mb-2">Latest Campaigns</h3>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-5">
+        <h2 className='font-medium text-[#004475] text-xl md:text-3xl mb-4'>Completed Campaign</h2>
+        <h3 className="font-medium text-base md:text-xl text-[#333333] mb-2">Latest Campaigns</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
           {
             closedCharityData.map((item, index) => (
               <CampaignCard 

@@ -62,11 +62,11 @@ function MyselfForm() {
                 onSubmit={formik.handleSubmit}
                 className='w-full'
             >
-                <div className="flex gap-7">
-                    <div className="w-1/2 text-[#333333]">
-                        <div className="border border-[#33333366] p-6 rounded-2xl mb-10">
+                <div className="flex flex-col md:flex-row gap-7">
+                    <div className="w-full md:w-1/2 text-[#333333]">
+                        <div className="border border-[#33333366] p-3 md:p-6 rounded-2xl mb-10">
                             <div className="pb-5 border-b border-[#33333380] mb-4">
-                                <h1 className='font-medium text-xl text-[#004475]'>Personal Information</h1>
+                                <h2 className='font-medium text-2xl md:text-3xl text-[#004475]'>Personal Information</h2>
                                 <p className='text-sm'>Kindly fill the form below.</p>
                             </div>
                             <InputField
@@ -145,7 +145,7 @@ function MyselfForm() {
                         </div>
                         <div className="border border-[#33333366] p-6 rounded-2xl">
                             <div className="pb-5 border-b border-[#33333380] mb-4">
-                                <h1 className='font-medium text-xl text-[#004475]'>Other Information</h1>
+                                <h2 className='font-medium text-2xl md:text-3xl text-[#004475]'>Other Information</h2>
                                 <p className='text-sm'>Kindly fill the form below.</p>
                             </div>
                             <div className='mb-4'>
@@ -241,10 +241,10 @@ function MyselfForm() {
                             </div>
                         </div>
                     </div>
-                    <div className="w-1/2">
+                    <div className="w-full md:w-1/2">
                         <div className="border border-[#33333366] p-6 rounded-2xl mb-10">
                             <div className="pb-5 border-b border-[#33333380] mb-4">
-                                <h1 className='font-medium text-xl text-[#004475]'>Contact Information</h1>
+                                <h2 className='font-medium text-2xl md:text-3xl text-[#004475]'>Contact Information</h2>
                                 <p className='text-sm'>Kindly fill the form below.</p>
                             </div>
                             <InputField

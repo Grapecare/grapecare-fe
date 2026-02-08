@@ -60,8 +60,8 @@ function CreateCause() {
     return (
         <div>
             <PageHeader title="Create Cause" />
-            <div className="p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
-                <h2 className='font-medium text-[#004475] text-3xl mb-1'>Basic Information</h2>
+            <div className="p-3 md:p-6 shadow-[0_4px_10px_#00000014] rounded-2xl mb-8">
+                <h2 className='font-medium text-[#004475] text-xl md:text-3xl mb-1'>Basic Information</h2>
                 <p className="text-sm text-[#333333] mb-4">Kindly fill the form below.</p>
                 <form
                     onSubmit={formik.handleSubmit}
@@ -233,7 +233,7 @@ function CreateCause() {
                             alignItems='center'
                             gap={2}
                         >
-                            <Text fontSize={['base']} fontWeight='medium' color='#333333'>I confirm all information is accurate & consent to medical screening.</Text>
+                            <Text fontSize={{ base: '10px', md: 'base' }} fontWeight='medium' color='#333333'>I confirm all information is accurate & consent to medical screening.</Text>
                         </Checkbox>
                     </div>
                     <Button

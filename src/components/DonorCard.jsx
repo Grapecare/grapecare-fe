@@ -9,8 +9,8 @@ function DonorCard() {
     return (
         <div className='bg-[#F4F4F580] rounded-[10px] p-5'>
             <WrapItem gap={4} alignItems={'center'} mb={4}>
-                <Avatar name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
-                <h2 className='text-[#000000] font-medium text-2xl'>Marvelous A.</h2>
+                <Avatar name='Segun Adebayo' src='https://bit.ly/sage-adebayo' boxSize={'50px'} />
+                <h2 className='text-[#000000] font-medium text-xl md:text-2xl'>Marvelous A.</h2>
             </WrapItem>
             <div className='mb-6 flex flex-col gap-4'>
                 <div className="flex items-center gap-4">

@@ -7,13 +7,11 @@ function BuyPlan() {
     <div>
       <PageHeader title="Health Plans" />
       <div className="">
-        <h2 className='font-medium text-[#004475] text-4xl mb-5'>Who are you buying this plan for?</h2>
+        <h2 className='font-medium text-[#004475] text-2xl md:text-4xl mb-5'>Who are you buying this plan for?</h2>
         <div className="">
             <BuyPlanBeneficiary/>
         </div>
-
       </div>
-        
     </div>
   )
 }

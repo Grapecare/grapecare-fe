@@ -34,9 +34,9 @@ function HMOPlans() {
     <div>
         <PageHeader title="Health Plans" />
         <div className="">
-            <h2 className='font-medium text-[#004475] text-4xl mb-2'>AXA Mansard Health Plans</h2>
-            <p className="mb-5">Don't let hospital bills prevent you from getting the care you need. Get health insurance for yourself and your family.</p>
-            <div className="grid grid-cols-3 gap-8">
+            <h2 className='font-medium text-[#004475] text-2xl md:text-4xl mb-2'>AXA Mansard Health Plans</h2>
+            <p className="mb-5 text-base font-regular">Don't let hospital bills prevent you from getting the care you need. Get health insurance for yourself and your family.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {
                     plans.map((plan, index) => (
                         <HmoPlanCard

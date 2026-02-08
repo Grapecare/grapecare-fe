@@ -11,24 +11,30 @@ function HealthPlans() {
     return (
         <div>
             <PageHeader title="Health Plans" />
-            <div className="flex gap-10 mb-10">
-                <div className="w-8/12 flex p-7 rounded-2xl bg-gradient-to-b from-[#005694] via-[#005694] to-[#001B2E]">
-                    <div className="w-7/12 text-white">
-                        <h2 className="font-medium text-lg mb-2">
+            <div className="flex flex-col md:flex-row gap-10 mb-10">
+                <div className="w-full md:w-8/12 flex flex-col md:flex-row flex-col-reverse p-5 md:p-7 rounded-2xl bg-gradient-to-b from-[#005694] via-[#005694] to-[#001B2E]">
+                    <div className="w-full md:w-7/12 text-white">
+                        <h2 className="font-medium text-lg mb-1 md:mb-2">
                             Join Our Platform As a HMO Provider.
                         </h2>
-                        <p className="text-sm mb-6">
+                        <p className="text-sm mb-6 font-regular">
                             Partner with us as  a licensed HMO to expand reach and connect with thousands
                             of users seeking affordable, quality health plans, gaining direct access to a growing community.
                         </p>
-                        <Button rightIcon={<ArrTopRight color='#fff' />} color='#fff' bg='#F93B99' fontWeight={'600'}>Become A Provider</Button>
+                        <Button rightIcon={<ArrTopRight color='#fff' />} color='#fff' 
+                            bg='#F93B99' 
+                            fontWeight={'600'}
+                            px={['70px', '50px']}
+                        >
+                        Become A Provider
+                        </Button>
                     </div>
-                    <div className="w-5/12 flex justify-end">
+                    <div className="w-full md:w-5/12 flex justify-center md:justify-end mb-5 md:mb-0">
                         <Image src={hmo} alt='hmo' />
                     </div>
                 </div>
-                <div className="w-full md:w-4/12 border border-[#33333380] rounded-[20px] px-6 py-9 flex flex-col items-center">
-                    <h2 className='text-[#333333CC] text-2xl mb-3'>Health Plan Status:</h2>
+                <div className="w-full md:w-4/12 border border-[#33333380] rounded-[20px] p-3 md:px-6 py-4 md:py-9 flex flex-col items-center">
+                    <h2 className='text-[#333333CC] text-xl md:text-2xl mb-3'>Health Plan Status:</h2>
                     <h2 className='text-[#333333] text-3xl font-semibold mb-6'>Inactive</h2>
                     <span className="w-16 h-16 rounded-full bg-[#F93B99] flex justify-center items-center">
                         <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,8 +44,8 @@ function HealthPlans() {
                 </div>
             </div>
             <div className="mb-6">
-                <h2 className='font-medium text-[#004475] text-4xl mb-5'>Available HMO Providers</h2>
-                <div className="grid grid-cols-3 gap-6">
+                <h2 className='font-semibold md:font-medium text-[#004475] text-2xl md:text-4xl mb-3 md:mb-5'>Available HMO Providers</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {
                         ['AXA Mansard','Reliance HMO','Hygeia HMO'].map((current,index)=>(
                             <HmoCard 
