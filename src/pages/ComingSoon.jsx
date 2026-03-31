@@ -45,7 +45,7 @@ function ComingSoon({ featureName = 'This feature' }) {
           _focus={{ outline: 'none', boxShadow: 'none' }}
           _focusVisible={{ outline: 'none', boxShadow: 'none' }}
           _active={{ outline: 'none', boxShadow: 'none' }}
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate('/dashboard/home')}
         >
           Back to Dashboard
         </Button>

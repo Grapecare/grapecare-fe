@@ -1,11 +1,12 @@
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MdDashboard } from 'react-icons/md';
 import { Link, useLocation } from 'react-router-dom';
 
 const routeNameMap = {
     "/dashboard": "Dashboard",
+    "/dashboard/home": "Dashboard",
     "/dashboard/profile": "Profile",
     "/dashboard/blood-bank": "Blood Donation",
     "/dashboard/blood-bank/get-started": "Donate",
@@ -42,13 +43,14 @@ function AppBreadCrumb({title}) {
             {pathnames.map((_, index) => {
                 const to = "/" + pathnames.slice(0, index + 1).join("/");
                 const isLast = index === pathnames.length - 1;
-
+                const label = routeNameMap[to] || title;
+                if (!label && !isLast) return null;
                 return (
                     <BreadcrumbItem key={to} isCurrentPage={isLast}>
                         {!isLast ? (
                             <BreadcrumbLink
                                 as={Link}
-                                to={to}
+                                to={to === "/dashboard" ? "/dashboard/home" : to}
                                 color="#333333"
                                 display="flex"
                                 alignItems="center"
@@ -57,7 +59,7 @@ function AppBreadCrumb({title}) {
                                 fontWeight={{ base: "400", md: "400" }}
                             >
                                 {to === "/dashboard" && <MdDashboard />}
-                                {routeNameMap[to]}
+                                {label}
                             </BreadcrumbLink>
                         ) : (
                             <BreadcrumbLink
@@ -66,7 +68,7 @@ function AppBreadCrumb({title}) {
                                 fontSize={{ base: "16px", md: "22px" }}
                                 cursor="default"
                             >
-                                {routeNameMap[to] ? routeNameMap[to] : title}
+                                {label}
                             </BreadcrumbLink>
                         )}
                     </BreadcrumbItem>

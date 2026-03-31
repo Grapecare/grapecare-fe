@@ -25,13 +25,13 @@ const isDev = import.meta.env.VITE_ENV === 'development' || import.meta.env.VITE
 function DashboardHome() {
   return (
     <Routes>
-      <Route path='/' element={<Dashboard />} />
+      <Route path='/home' element={<Dashboard />} />
       <Route path='/blood-bank' element={<BloodBank />} />
       <Route path='/donate' element={<DonateBlood />} />
       <Route path='/blood-bank/get-started' element={<GetStarted />} />
       <Route path='/tele-consultation/register-doctor' element={<RegisterDoctor />} />
       <Route path='/save-a-soul' element={isDev ? <SaveASoul /> : <ComingSoon featureName="Save-a-Soul" />} />
-      <Route path='/dashboard' element={isDev ? <Dashboard /> : <ComingSoon featureName="Health Plans" />} />
+      {/* <Route path='/dashboard/home' element={isDev ? <Dashboard /> : <ComingSoon featureName="Health Plans" />} /> */}
       <Route path='/tele-consultation' element={isDev ? <TeleConsulting /> : <ComingSoon featureName="TeleConsulting" />} />
       <Route path='/save-a-soul/create-cause' element={isDev ? <CreateCause /> : <ComingSoon featureName="Save-a-Soul" />} />
       <Route path='/save-a-soul/:id' element={isDev ? <CampaignDetails /> : <ComingSoon featureName="Save-a-Soul" />} />

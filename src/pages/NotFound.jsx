@@ -5,7 +5,7 @@ import grapeIcon from '../assets/images/grapeIcon.svg'
 
 function NotFound({ hideHeader = false, inDashboard = false }) {
   const navigate = useNavigate()
-  const homePath = inDashboard ? '/dashboard' : '/'
+  const homePath = inDashboard ? '/dashboard/home' : '/'
 
   return (
     <div className={`${hideHeader ? 'min-h-[60vh]' : 'min-h-screen'} flex flex-col`}>

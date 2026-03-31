@@ -15,7 +15,7 @@ const navMenu = [
   {
     name: 'Dashboard',
     icon: DashBoardIcon,
-    path: '/dashboard'
+    path: '/dashboard/home'
   },
   {
     name: 'Blood Bank',
@@ -58,7 +58,6 @@ function MainSideBar() {
             navMenu.map((nav, index) => {
               const Icon = nav.icon;
               const isActive = location.pathname === nav.path || location.pathname.startsWith(nav.path + '/');
-
               return (
                 <li key={index}>
                   <NavLink

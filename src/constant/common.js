@@ -8,7 +8,7 @@ export const navMenu = [
     {
       name: 'Dashboard',
       icon: DashBoardIcon,
-      path: '/dashboard'
+      path: '/dashboard/home'
     },
     {
       name: 'Blood Bank',

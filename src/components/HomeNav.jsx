@@ -57,7 +57,7 @@ function HomeNav() {
                     src={grapeIcon} 
                     alt="logo" 
                     className='hidden md:block cursor-pointer' 
-                    onClick={() => navigate(isOnDashboard ? '/' : '/dashboard')}
+                    onClick={() => navigate(isOnDashboard ? '/' : '/dashboard/home')}
                 />
                 {/* <Image src={grapeIcon} alt="logo" boxSize='100px' className='md:hidden'/> */}
                 <div className='md:hidden'>
